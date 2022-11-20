@@ -6,7 +6,7 @@ default: &default
 
 development:
   <<: *default
-  database: AskIt_development
+  database: askIt_development
   username: <%= ENV['DATABASE_USER_NAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
 
@@ -42,7 +42,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: AskIt_test
+  database: askit_test
   username: <%= ENV['DATABASE_USER_NAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
 
@@ -68,6 +68,6 @@ test:
 #
 production:
   <<: *default
-  database: AskIt_production
-  username: AskIt
+  database: askit_production
+  username: askIt
   password: <%= ENV["ASKIT_DATABASE_PASSWORD"] %>
