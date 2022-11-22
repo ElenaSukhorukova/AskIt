@@ -1,3 +1,17 @@
 en:
+  activerecord:
+    models:
+     question:
+        one: 'Question'
+        other: 'Questions'
+    attributes:
+      question:
+        title: 'Title'
+        body: 'Question'
   pages:
-    greeting: '%{name}, welcome to AskIt!'
+    home: 'Home'
+    greeting: 'Welcome to AskIt!'
+  questions:
+    index: 'Questions'
+
+    
