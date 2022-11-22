@@ -1,0 +1,12 @@
+<h1><%= t('questions.index') %></h2>
+
+<% if @questions.try(:any) %>
+  <% @questions.each do |question| %>
+    <h2><%= question.title %></h2>
+    <time datetime="<%= question.formatted_created_at %>">
+      <%= question.formatted_created_at %>
+    </time>
+    <p><%= question.body %></p>
+
+  <% end %>
+<% end %>
