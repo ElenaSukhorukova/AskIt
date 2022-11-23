@@ -1,12 +1,14 @@
-<h1><%= t('questions.index') %></h2>
+<h1><%= @model_name.pluralize %></h2>
 
-<% if @questions.try(:any) %>
+<% if @questions.try(:any?) %>
   <% @questions.each do |question| %>
     <h2><%= question.title %></h2>
     <time datetime="<%= question.formatted_created_at %>">
       <%= question.formatted_created_at %>
     </time>
     <p><%= question.body %></p>
-
+    <%= link_to t('link.show', model: @model_name), question_path(question) %>
+    <%= link_to t('link.edit', model: @model_name.downcase), edit_question_path(question) %>
+    <%= button_to t('button.destroy', model: @model_name.downcase), question_path(question), method: :delete, class: "btn btn-light", :onclick => "return confirm('Are you sure?')", :remote => true %>  
   <% end %>
 <% end %>
