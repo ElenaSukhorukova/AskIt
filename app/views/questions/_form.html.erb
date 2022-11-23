@@ -1,0 +1,5 @@
+<%= simple_form_for question, method: method, url: url do |f| %>
+  <%= f.input :title, required: true, minlength: 2, placeholder: Question.human_attribute_name("title")  %>
+  <%= f.input :body, required: true, minlength: 2, placeholder: Question.human_attribute_name("body") %>
+  <%= f.button :submit, submit, class: "btn btn-light" %> 
+<% end %>
