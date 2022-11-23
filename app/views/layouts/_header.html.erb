@@ -2,9 +2,37 @@
   <nav>
     <ul>
       <li><%= link_to t('pages.home'), root_path %>
-      <li><%= link_to t('questions.index'), questions_path %>
+      <li><%= link_to Question.model_name.human.pluralize, questions_path %>
+      <% unless user_signed_in? %>
+        <li><%= link_to t('nav.sign_in'), sign_in_url, class: "navbar-brand text-dark text-decoration-none text-end"  %></li>
+        <li><%= link_to t('nav.sign_up'), sign_up_path, class: "navbar-brand text-dark text-decoration-none text-end" %></li>
+      <% else %>
+        <li><%= link_to t('link.new', model: Question.model_name.human.downcase), new_user_question_path(current_user) %>
+        <li>
+          <%= link_to "Sign out", destroy_user_session_path, 
+          'data- turbo_method': :delete, :onclick => "return confirm('Are you sure?')", 
+          :remote => true, class: "me-3 py-2 text-dark text-decoration-none" %>
+        </li>
+      <% end %>
     </ul>
   </nav>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+    <% flash.each do |type, msg| %>    
+      <!-- Change flash messages of devise to bootstrap format -->
+      <% case type %>
+        <% when 'alert'%>
+          <% type = 'danger' %>
+        <% when 'notice' %>
+          <% type = 'success' %>
+        <% end %>
+                
+      <div 
+        class="alert alert-<%= type %> flash__message" ,
+        role="alert", 
+        data-controller="removals", 
+        data-action="animationend->removals#remove">
+      
+          <p class='text-center'><%= msg %></p>
+       
+      </div>
+    <% end %>
 </header>
