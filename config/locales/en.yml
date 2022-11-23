@@ -11,7 +11,21 @@ en:
   pages:
     home: 'Home'
     greeting: 'Welcome to AskIt!'
-  questions:
-    index: 'Questions'
-
-    
+    new: 'A new %{model}'
+    edit: 'The edit %{model}'
+  nav:
+    sign_up: 'Sign up'
+    sign_in: 'Log in'
+    sign_out: 'Sign out'
+  button:
+    new: 'Send'
+    edit: 'Edit'
+    destroy: "Destroy the %{model}"
+  flash:
+    new: "The %{model} was saved successfully"
+    update: "The %{model} was updated successfully"
+    destroy: "The %{model} was deleted successfully"
+  link:
+    new: 'Send a %{model}'
+    edit: "Edit the %{model}"
+    show: "Show the %{model}"
