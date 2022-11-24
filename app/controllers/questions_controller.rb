@@ -1,28 +1,27 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :define_user, only: %i[new create]
-  before_action :define_question,except: %i[new create index]
+  before_action :define_article, except: %i[new create index]
   before_action do 
-    @model_name = Question.model_name.human
+    @model_name = Artcile.model_name.human
   end
 
   def index
-    @questions = Question.all
+    @questions = Articles.all
   end
 
   def show
   end
 
-
   def new
-    @question = @user.questions.build
+    @article = @user.articles.build
   end
 
   def create
-    @question = @user.questions.build(question_params)
+    @article = @user.articles.build(article_params)
 
     if @question.save
-      redirect_to questions_path, success: I18n.t('flash.new', model: @model_name.downcase)
+      redirect_to articles_path, success: I18n.t('flash.new', model: @model_name.downcase)
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +31,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(question_params)
+    if @article.update(article_params)
       redirect_to questions_path, success: I18n.t('flash.update', model: @model_name.downcase)
     else
       render :edit, status: :unprocessable_entity
@@ -40,8 +39,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if @question.destroy
-      redirect_to questions_path, success: I18n.t('flash.destroy', model: @model_name.downcase)
+    if @article.destroy
+      redirect_to articles_path, success: I18n.t('flash.destroy', model: @model_name.downcase)
     end
   end
 
@@ -52,10 +51,10 @@ class QuestionsController < ApplicationController
     end
 
     def define_question
-      @question = Question.find(params[:id])
+      @article = Article.find(params[:id])
     end
 
-    def question_params
-      params.require(:question).permit(:title, :body)
+    def article_params
+      params.require(:article).permit(:title, :content, :status)
     end
 end
