@@ -12,7 +12,7 @@ en:
     home: 'Home'
     greeting: 'Welcome to AskIt!'
     new: 'A new %{model}'
-    edit: 'The edit %{model}'
+    edit: 'Edit the %{model}'
   nav:
     sign_up: 'Sign up'
     sign_in: 'Log in'

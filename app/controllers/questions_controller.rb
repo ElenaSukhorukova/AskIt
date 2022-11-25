@@ -1,27 +1,25 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :define_user, only: %i[new create]
-  before_action :define_article, except: %i[new create index]
-  before_action do 
-    @model_name = Artcile.model_name.human
-  end
+  before_action :define_question, except: %i[new create index]
+  helper_method :model_name
 
   def index
-    @questions = Articles.all
+    @questions = Question.all
   end
 
   def show
   end
 
   def new
-    @article = @user.articles.build
+    @question = @user.questions.build
   end
 
   def create
-    @article = @user.articles.build(article_params)
+    @question = @user.questions.build(question_params)
 
     if @question.save
-      redirect_to articles_path, success: I18n.t('flash.new', model: @model_name.downcase)
+      redirect_to questions_path, success: I18n.t('flash.new', model: model_name.downcase)
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,30 +29,34 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @article.update(article_params)
-      redirect_to questions_path, success: I18n.t('flash.update', model: @model_name.downcase)
+    if @question.update(question_params)
+      redirect_to questions_path, success: I18n.t('flash.update', model: model_name.downcase)
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if @article.destroy
-      redirect_to articles_path, success: I18n.t('flash.destroy', model: @model_name.downcase)
+    if @question.destroy
+      redirect_to questions_path, success: I18n.t('flash.destroy', model: model_name.downcase)
     end
   end
 
   private
+
+    def model_name
+      Question.model_name.human
+    end
 
     def define_user
       @user = User.find(params[:user_id])
     end
 
     def define_question
-      @article = Article.find(params[:id])
+      @question = Question.find(params[:id])
     end
 
-    def article_params
-      params.require(:article).permit(:title, :content, :status)
+    def question_params
+      params.require(:question).permit(:title, :body)
     end
 end
