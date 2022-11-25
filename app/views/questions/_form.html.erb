@@ -1,5 +1,7 @@
-<%= simple_form_for question, method: method, url: url do |f| %>
-  <%= f.input :title, required: true, minlength: 2, placeholder: Question.human_attribute_name("title")  %>
-  <%= f.input :body, required: true, minlength: 2, placeholder: Question.human_attribute_name("body") %>
-  <%= f.button :submit, submit, class: "btn btn-light" %> 
-<% end %>
+<div class='col-sm-10'>
+  <%= simple_form_for question, method: method, url: url do |f| %>
+    <%= f.input :title, required: true, minlength: 2, placeholder: Question.human_attribute_name("title"), input_html: { class: 'mb-2' } %>
+    <%= f.input :body, required: true, minlength: 2, placeholder: Question.human_attribute_name("body"), input_html: { class: 'm2-2' } %>
+    <%= f.button :submit, submit, class: "btn btn-primary mt-2" %> 
+  <% end %>
+</div>

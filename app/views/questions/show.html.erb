@@ -1,8 +1,15 @@
-<h1><%= @question.title %></h1>
+<h1 class='md-4'><%= @question.title %></h1>
 
   <time datetime="<%= @question.formatted_created_at %>">
     <%= @question.formatted_created_at %>
   </time>
-<p>
+<p class='lead my-3'>
   <%= @question.body %>
 </p>
+  <% if user_signed_in? && current_user == @question.user %>
+    <div class="btn-group" role="group">
+      <%= link_to t('link.edit', model: model_name.downcase), edit_question_path(@question), class: 'btn btn-secondary me-2' %>
+      <%= button_to t('button.destroy', model: model_name.downcase), question_path(@question), method: :delete, 
+        class: "btn btn-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>
+    </div>
+  <% end %> 
