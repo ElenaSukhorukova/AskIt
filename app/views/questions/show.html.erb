@@ -1,15 +1,33 @@
-<h1 class='md-4'><%= @question.title %></h1>
-
-  <time datetime="<%= @question.formatted_created_at %>">
-    <%= @question.formatted_created_at %>
-  </time>
-<p class='lead my-3'>
-  <%= @question.body %>
-</p>
-  <% if user_signed_in? && current_user == @question.user %>
-    <div class="btn-group" role="group">
-      <%= link_to t('link.edit', model: model_name.downcase), edit_question_path(@question), class: 'btn btn-secondary me-2' %>
-      <%= button_to t('button.destroy', model: model_name.downcase), question_path(@question), method: :delete, 
-        class: "btn btn-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>
-    </div>
-  <% end %> 
+<section class='container'>
+  <h1 class='md-4'><%= @question.title %></h1>
+  <p>
+    <%= attribute_model(@question, :user) %>
+    <strong><%= @question.user.username %></strong>
+  </p>
+  <p>
+    <time datetime="<%= @question.formatted_created_at %>">
+      <%= @question.formatted_created_at %>
+    </time>
+  </p>
+  <p class='lead my-3'>
+    <%= @question.body %>
+  </p>
+    <% if user_signed_in? && current_user == @question.user %>
+      <div class="btn-group" role="group">
+        <%= link_to t('link.edit', model: i18n_model_name(@question).downcase), 
+          edit_question_path(@question), class: 'btn btn-secondary me-2' %>
+        <%= button_to t('button.destroy', model: i18n_model_name(@question).downcase), 
+          question_path(@question), method: :delete, class: "btn btn-danger", 
+          :onclick => "return confirm('Are you sure?')", :remote => true %>
+      </div>
+    <% end %> 
+</section>
+<hr class='my-3'>
+<section class='col-8'>
+  <% if @answers.try(:any?) %>
+    <h2 class='mt-4'><%= i18n_model_name(@answer, count: 2) %></h2>
+    <%= render partial: 'answers/answer', collection: @answers %>  
+  <% end %>
+  
+  <%= render partial: 'answers/form', locals: { model: [@question, @answer], method: :post } %>
+</section>

@@ -1,3 +1,5 @@
-<h1 class='md-4'><%= t('pages.edit', model: model_name.downcase) %></h1>
+<section class='col-8'>
+  <h1 class='md-4'><%= t('page.edit', model: i18n_model_name(@question).downcase) %></h1>
 
-<%= render partial: 'form', locals: { question: @question, method: :put, url: question_path(@question), submit: t('button.edit') } %>
+  <%= render partial: 'form', locals: { model: @question, method: :put, submit: t('button.edit') } %>
+</section>

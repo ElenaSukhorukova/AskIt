@@ -1,31 +1,37 @@
-<h1 class='md-4'><%= model_name.pluralize %></h2>
+<section>
+  <h1 class='md-4'><%= i18n_model_name(@questions, count: 2) %></h2>
 
-  <%= link_to t('link.new', model: model_name), new_user_question_path(current_user), class: 'btn btn-info me-2' if user_signed_in? %>
+    <%= link_to t('link.new', model: i18n_model_name(@questions).downcase), 
+      new_user_question_path(current_user), class: 'btn btn-info me-2' if user_signed_in? %>
 
-<% if @questions.try(:any?) %>
-  <% @questions.each do |question| %>
-    <article class='card mt-2'>
-      <div class='card-body'>
-        <h2><%= question.title %></h2>
+  <% if @questions.try(:any?) %>
+    <% @questions.each do |question| %>
+      <article class='card mt-2'>
+        <div class='card-body'>
+          <h2><%= question.title %></h2>
 
-        <section class='card-text'>
-          <time datetime="<%= question.formatted_created_at %>">
-            <%= question.formatted_created_at %>
-          </time>
+          <section class='card-text'>
+            <time datetime="<%= question.formatted_created_at %>">
+              <%= question.formatted_created_at %>
+            </time>
 
-          <p class='my-2'>
-            <%= question.body %>
-          </p>
-        </section>
-          <div class="btn-group" role="group">
-            <%= link_to t('link.show', model: model_name), question_path(question), class: 'btn btn-primary me-2' %>
-            <% if user_signed_in? && current_user == question.user %>
-              <%= link_to t('link.edit', model: model_name.downcase), edit_question_path(question), class: 'btn btn-secondary me-2' %>
-              <%= button_to t('button.destroy', model: model_name.downcase), question_path(question), method: :delete, 
-                class: "btn btn-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>  
-            <% end %>
-          </div>
-      </div>
-    </article>
+            <p class='my-2'>
+              <%= question.body %>
+            </p>
+          </section>
+            <div class="btn-group" role="group">
+              <%= link_to t('link.show', model: i18n_model_name(question).downcase), 
+                question_path(question), class: 'btn btn-primary me-2' %>
+              <% if user_signed_in? && current_user == question.user %>
+                <%= link_to t('link.edit', model: i18n_model_name(question).downcase), 
+                  edit_question_path(question), class: 'btn btn-secondary me-2' %>
+                <%= button_to t('button.destroy', model: i18n_model_name(question).downcase), 
+                  question_path(question), method: :delete, 
+                  class: "btn btn-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>  
+              <% end %>
+            </div>
+        </div>
+      </article>
+    <% end %>
   <% end %>
-<% end %>
+</section>
