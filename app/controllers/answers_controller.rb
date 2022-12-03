@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :define_variables!, only: %i[create]
-  before_action :define_answer, only: %i[edit update destroy]
+  before_action :define_answer!, only: %i[edit update destroy]
   include ApplicationHelper
 
   def create
@@ -26,8 +26,7 @@ class AnswersController < ApplicationController
         redirect_to question_path(@answer.question),
           success: I18n.t('flash.update', model: i18n_model_name(@answer).downcase)
       else
-        redirect_to question_path(@answer.question), 
-          danger: "#{@answer.errors.full_messages.each{|error| error.capitalize}.join(' ')}"
+        render :edit, status: :unprocessable_entity
       end
     end
   end
@@ -42,13 +41,14 @@ class AnswersController < ApplicationController
   end
 
   private
-    def define_answer
-      @answer = Answer.find(params[:id])
-    end
 
-    def define_variables!
+  def define_variables!
       @question = Question.find(params[:question_id])
       @user = current_user
+    end
+
+    def define_answer!
+      @answer = Answer.find(params[:id])
     end
 
     def answer_params
