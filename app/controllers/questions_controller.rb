@@ -1,8 +1,8 @@
 class QuestionsController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_user!, except: %i[index show]
-  before_action :define_user, only: %i[new create]
-  before_action :define_question, except: %i[new create index]
+  before_action :define_user!, only: %i[new create]
+  before_action :define_question!, except: %i[new create index]
 
   def index
     @questions = Question.all.order(created_at: :desc)
@@ -53,11 +53,11 @@ class QuestionsController < ApplicationController
 
   private
 
-    def define_user
+    def define_user!
       @user = User.find(params[:user_id])
     end
 
-    def define_question
+    def define_question!
       @question = Question.find(params[:id])
     end
 
