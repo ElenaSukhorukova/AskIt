@@ -95,6 +95,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.2)
+      devise (>= 4.8.0)
     erubi (1.11.0)
     ffi (1.15.5)
     ffi (1.15.5-x64-mingw32)
@@ -254,6 +256,7 @@ DEPENDENCIES
   cssbundling-rails (~> 1.1)
   debug
   devise
+  devise-i18n
   figaro
   importmap-rails
   jbuilder
