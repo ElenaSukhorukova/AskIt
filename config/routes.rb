@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resources :users do 
       resources :questions
     end
+    resources :questions do 
+      resources :answers, only: %i[create edit update destroy]
+    end
   end
 
   resources :questions, only: [:index, :show]
