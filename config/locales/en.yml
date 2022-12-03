@@ -11,11 +11,12 @@ en:
       question:
         title: 'Title'
         body: 'Question'
-        user: 'An author of the question:'
+        user: 'Author:'
       answer:
         body: 'Answer'
-        user: 'An author of the answer:'
+        user: 'Author:'
   page:
+    site_name: 'AskIt'
     home: 'Home'
     greeting: 'Welcome to AskIt!'
     new: 'A new %{model}'
@@ -36,7 +37,7 @@ en:
     update: "The %{model} was updated successfully"
     destroy: "The %{model} was deleted successfully"
   link:
-    new: 'Send a %{model}'
+    new: 'Create a new %{model}'
     edit: "Edit the %{model}"
     show: "Show the %{model}"
   devise:
