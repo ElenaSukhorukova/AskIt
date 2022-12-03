@@ -1,10 +1,9 @@
 class Question < ApplicationRecord
+  include TimeShow
+  
   validates :title, presence: true, length: { minimum: 2 }
   validates :body, presence: true, length: { minimum: 2 }
 
   belongs_to :user
-
-  def formatted_created_at
-    created_at.strftime('%Y-%m-%d %H:%M:%S')
-  end
+  has_many :answers, dependent: :destroy
 end
