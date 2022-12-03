@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset='utf-8'>
-    <title>AskIt</title>
+    <title><%= full_title(yield(:page_title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -16,7 +16,7 @@
 
   <body>
     <div class='wrapper'>
-      <%= render 'layouts/header'%>
+      <%= yield :main_menu %>
 
       <main class='container mt-3 content'>
         <% flash.each do |type, msg| %>    
