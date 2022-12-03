@@ -1,13 +1,16 @@
 <section class='container'>
+  <% provide :page_title, @question.title %>
+  <% currently_at %>
+  
   <h1 class='md-4'><%= @question.title %></h1>
   <p>
+    <small>
+      <time datetime="<%= @question.formatted_created_at %>">
+        <%= @question.formatted_created_at %>
+      </time>
+    </small>
     <%= attribute_model(@question, :user) %>
     <strong><%= @question.user.username %></strong>
-  </p>
-  <p>
-    <time datetime="<%= @question.formatted_created_at %>">
-      <%= @question.formatted_created_at %>
-    </time>
   </p>
   <p class='lead my-3'>
     <%= @question.body %>

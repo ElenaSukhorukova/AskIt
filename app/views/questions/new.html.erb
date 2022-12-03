@@ -1,5 +1,8 @@
 <section class='col-8'>
-    <%= render partial: 'shared/go_back_button', locals: { path: questions_path } %>
+  <% provide :page_title, t('page.new', model: i18n_model_name(@question).downcase) %>
+  <% currently_at t('page.new', model: i18n_model_name(@question).downcase) %>
+  
+  <%= render partial: 'shared/go_back_button', locals: { path: questions_path } %>
   <h1 class='md-4'><%= t('page.new', model: i18n_model_name(@question).downcase) %></h1>
 
   <%= render partial: 'form', locals: { model: [@user, @question], method: :post, submit: t('button.new') } %>

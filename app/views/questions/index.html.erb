@@ -1,4 +1,7 @@
 <section>
+  <% provide :page_title, i18n_model_name(@questions, count: 2) %>
+  <% currently_at i18n_model_name(@questions, count: 2) %>
+
   <h1 class='md-4'><%= i18n_model_name(@questions, count: 2) %></h2>
 
     <%= link_to t('link.new', model: i18n_model_name(@questions).downcase), 
