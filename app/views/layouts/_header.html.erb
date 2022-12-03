@@ -1,22 +1,24 @@
-<header class="p-3 bg-dark text-white">
+<header class="bg-dark text-white">
   <div class='container'>
-    <nav class="d-flax flex-wrap align-items-center justify-content-center justify-content-lg-strart">
-    <ul class='nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0'>
-      <li><%= link_to t('pages.home'), root_path, class: "nav-link px-2 text-white" %>
-      <li><%= link_to Question.model_name.human.pluralize, questions_path, class: "nav-link px-2 text-white" %>
-      <% if user_signed_in? %>
-        <li><%= link_to t('link.new', model: Question.model_name.human.downcase), 
-              new_user_question_path(current_user), class: "nav-link px-2 text-white" %>
-        <li>
-          <%= link_to t('nav.sign_out'), sign_out_path, 
-          'data- turbo_method': :delete, :onclick => "return confirm('Are you sure?')", 
-          :remote => true, class: "nav-link px-2 text-white" %>
-        </li>
-      <% else %>
-        <li><%= link_to t('nav.sign_in'), sign_in_path, class: "nav-link px-2 text-white"  %></li>
-        <li><%= link_to t('nav.sign_up'), sign_up_path, class: "nav-link px-2 text-white" %></li>
-      <% end %>
-    </ul>
-      </nav>
+    <nav class="navbar navbar-expand-lg">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+          <li class="nav-item"><%= link_to t('pages.home'), root_path, class: "nav-link px-4 text-white" %>
+          <li class="nav-item"><%= link_to Question.model_name.human.pluralize, questions_path, class: "nav-link px-4 text-white" %>
+          <% if user_signed_in? %>
+            <li class="nav-item"><%= link_to t('link.new', model: Question.model_name.human.downcase), 
+                  new_user_question_path(current_user), class: "nav-link px-4 text-white" %>
+            <li class="nav-item">
+              <%= link_to t('nav.sign_out'), sign_out_path, 
+              'data- turbo_method': :delete, :onclick => "return confirm('Are you sure?')", 
+              :remote => true, class: "nav-link px-4 text-white" %>
+            </li>
+          <% else %>
+            <li class="nav-item"><%= link_to t('nav.sign_in'), sign_in_path, class: "nav-link px-4 text-white"  %></li>
+            <li class="nav-item"><%= link_to t('nav.sign_up'), sign_up_path, class: "nav-link px-4 text-white" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
   </div>
 </header>

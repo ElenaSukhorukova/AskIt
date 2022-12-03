@@ -4,31 +4,35 @@
     <meta charset='utf-8'>
     <title>AskIt</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
+    
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "custom_application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-    <%= render 'layouts/header'%>
-    
-    <main class='container mt-3'>
-      <% flash.each do |type, msg| %>    
-        <!-- Change flash messages of devise to bootstrap format -->
-        <% case type %>
-        <% when 'alert'%>
-          <% type = 'danger' %>
-        <% when 'notice' %>
-          <% type = 'success' %>
-        <% end %>
+    <div class='wrapper'>
+      <%= render 'layouts/header'%>
 
-        <%= tag.div msg, class: "alert alert-#{type} text-center", role: 'alert' %>
-      <% end %>
-      <%= yield %>
-    </main>
+      <main class='container mt-3 content'>
+        <% flash.each do |type, msg| %>    
+          <!-- Change flash messages of devise to bootstrap format -->
+          <% case type %>
+          <% when 'alert'%>
+            <% type = 'danger' %>
+          <% when 'notice' %>
+            <% type = 'success' %>
+          <% end %>
+
+          <%= tag.div msg, class: "alert alert-#{type} text-center", role: 'alert' %>
+        <% end %>
+          <%= yield %>
+      </main>
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>
