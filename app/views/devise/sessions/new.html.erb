@@ -4,14 +4,14 @@
     html: { method: :post }, data: { turbo: false }, :validate => true) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
-    <%= f.input :email, autofocus: true, input_html: { autocomplete: "email" } %>
-    <%= f.input :password, input_html: { autocomplete: "current-password" } %>
+    <%= f.input :email, autofocus: true, input_html: { autocomplete: "email", class: 'mb-2' } %>
+    <%= f.input :password, input_html: { autocomplete: "current-password", class: 'mb-2' } %>
     <% if devise_mapping.rememberable? %>
       <%= f.check_box :remember_me, as: :check_boxes %>
       <%= f.label :remember_me %>
     <% end %>
       <div class='action mt-2 mb-2'>
-        <%= f.submit :submit, class: "btn btn-primary" %>
+        <%= f.submit :submit, class: "btn btn-primary mt-2" %>
       </div>
   <% end %>
 
