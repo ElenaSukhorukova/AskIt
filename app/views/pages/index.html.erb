@@ -1,3 +1,7 @@
-<h1><%= t('page.greeting') %></h1>
+<section>
+  <% provide :page_title, t('page.home') %>
+  <% currently_at t('page.home') %>
+  <h1 class='md-2'><%= t('page.greeting') %></h1>
 
-&copy: @elenasu <%= Time.now.year %>
+    &copy: @elenasu <%= Time.now.year %>
+</section>
