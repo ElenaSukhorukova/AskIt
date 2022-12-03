@@ -1,14 +1,16 @@
 class QuestionsController < ApplicationController
+  include ApplicationHelper
   before_action :authenticate_user!, except: %i[index show]
   before_action :define_user, only: %i[new create]
   before_action :define_question, except: %i[new create index]
-  helper_method :model_name
 
   def index
-    @questions = Question.all
+    @questions = Question.all.order(created_at: :desc)
   end
 
   def show
+    @answer = @question.answers.build
+    @answers = @question.answers.order(created_at: :desc)
   end
 
   def new
@@ -19,7 +21,8 @@ class QuestionsController < ApplicationController
     @question = @user.questions.build(question_params)
 
     if @question.save
-      redirect_to questions_path, success: I18n.t('flash.new', model: model_name.downcase)
+      redirect_to question_path(@question), 
+        success: I18n.t('flash.new', model: i18n_model_name(@question).downcase)
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,24 +32,26 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(question_params)
-      redirect_to questions_path, success: I18n.t('flash.update', model: model_name.downcase)
-    else
-      render :edit, status: :unprocessable_entity
+    if @question.user == current_user
+      if @question.update(question_params)
+        redirect_to questions_path, 
+          success: I18n.t('flash.update', model: i18n_model_name(@question).downcase)
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
   def destroy
-    if @question.destroy
-      redirect_to questions_path, success: I18n.t('flash.destroy', model: model_name.downcase)
+    if @question.user == current_user
+      if @question.destroy
+        redirect_to questions_path, 
+          success: I18n.t('flash.destroy', model: i18n_model_name(@question).downcase)
+      end
     end
   end
 
   private
-
-    def model_name
-      Question.model_name.human
-    end
 
     def define_user
       @user = User.find(params[:user_id])
