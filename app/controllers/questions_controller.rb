@@ -1,16 +1,15 @@
 class QuestionsController < ApplicationController
-  include ApplicationHelper
   before_action :authenticate_user!, except: %i[index show]
   before_action :define_user!, only: %i[new create]
   before_action :define_question!, except: %i[new create index]
 
   def index
-    @questions = Question.all.order(created_at: :desc)
+    @questions = Question.order(created_at: :desc).page(params[:page]).per(4)
   end
 
   def show
     @answer = @question.answers.build
-    @answers = @question.answers.order(created_at: :desc)
+    @answers = @question.answers.order(created_at: :desc).page(params[:page]).per(3)
   end
 
   def new
