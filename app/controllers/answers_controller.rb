@@ -2,14 +2,13 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :define_variables!, only: %i[create]
   before_action :define_answer!, only: %i[edit update destroy]
-  include ApplicationHelper
 
   def create
     @answer = @question.answers.build(answer_params)
     @answer.user = @user 
 
     if @answer.save
-      redirect_to question_path(@question),
+      redirect_to question_path(@question, anchor: "answer-#{@answer.id}"),
         success: I18n.t('flash.new', model: i18n_model_name(@answer).downcase)
     else
       redirect_to question_path(@question), 
