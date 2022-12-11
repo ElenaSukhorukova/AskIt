@@ -55,12 +55,15 @@ gem 'simple_form'
 gem "jsbundling-rails", "~> 1.0"
 gem "cssbundling-rails", "~> 1.1"
 
+gem 'kaminari', '~> 1.2.2'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
   # gem for ENV
   gem "figaro"
+  gem 'faker', '~> 3'
 end
 
 group :development do
