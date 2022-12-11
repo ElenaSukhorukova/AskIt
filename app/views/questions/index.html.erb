@@ -4,8 +4,12 @@
 
   <h1 class='md-4'><%= i18n_model_name(@questions, count: 2) %></h2>
 
-    <%= link_to t('link.new', model: i18n_model_name(@questions).downcase), 
-      new_user_question_path(current_user), class: 'btn btn-info me-2' if user_signed_in? %>
+  <%= link_to t('link.new', model: i18n_model_name(@questions).downcase), 
+    new_user_question_path(current_user), class: 'btn btn-info me-2' if user_signed_in? %>
+
+  <div class='my-3 text-center'>
+    <%= paginate @questions %>
+  </div>
 
   <% if @questions.try(:any?) %>
     <% @questions.each do |question| %>
@@ -17,9 +21,11 @@
             <time datetime="<%= question.formatted_created_at %>">
               <%= question.formatted_created_at %>
             </time>
+            <%= i18n_model_name(Answer.new, count: 2) %>:
+            <%= question.answers.count %>
 
             <p class='my-2'>
-              <%= question.body %>
+              <%= truncate strip_tags(question.body), length: 100, omission: '... (continued)' %>
             </p>
           </section>
             <div class="btn-group" role="group">
@@ -38,3 +44,6 @@
     <% end %>
   <% end %>
 </section>
+<div class='my-3 text-center'>
+  <%= paginate @questions, window: 2 %>
+</div>

@@ -2,6 +2,8 @@
   <% provide :page_title, @question.title %>
   <% currently_at %>
   
+  <%= render partial: 'shared/go_back_button', locals: { path: questions_path } %>
+
   <h1 class='md-4'><%= @question.title %></h1>
   <p>
     <small>
@@ -12,9 +14,9 @@
     <%= attribute_model(@question, :user) %>
     <strong><%= @question.user.username %></strong>
   </p>
-  <p class='lead my-3'>
-    <%= @question.body %>
-  </p>
+  <div class='lead my-3'>
+    <%= sanitize @question.body %>
+  </div>
     <% if user_signed_in? && current_user == @question.user %>
       <div class="btn-group" role="group">
         <%= link_to t('link.edit', model: i18n_model_name(@question).downcase), 
@@ -27,10 +29,19 @@
 </section>
 <hr class='my-3'>
 <section class='col-8'>
-  <% if @answers.try(:any?) %>
-    <h2 class='mt-4'><%= i18n_model_name(@answer, count: 2) %></h2>
-    <%= render partial: 'answers/answer', collection: @answers %>  
-  <% end %>
-  
   <%= render partial: 'answers/form', locals: { model: [@question, @answer], method: :post } %>
+  
+  <% if @answers.try(:any?) %>
+  
+    <div class='my-3 text-center'>
+      <%= paginate @answers %>
+    </div>
+
+    <h2 class='mt-4'><%= i18n_model_name(@answer, count: 2) %></h2>
+    <%= render @answers %>
+  
+    <div class='my-3 text-center'>
+      <%= paginate @answers %>
+    </div>
+  <% end %> 
 </section>
