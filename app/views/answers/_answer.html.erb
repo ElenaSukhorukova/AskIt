@@ -1,4 +1,4 @@
-<article class='mb-3 card'>
+<article class='mb-3 card' id="answer-<%= answer.id %>">
   <div class='card-body'>
     <section class='card-text'>
       <p>
@@ -10,10 +10,10 @@
         <%= attribute_model(answer, :user) %>
         <strong><%= answer.user.username %></strong>
       </p>
-      <p>
+      <div class='mt-2 mb-3'>
         <strong><%= attribute_model(answer, :body) %></strong>
-        <%= answer.body %>
-      </p>
+        <%= sanitize answer.body %>
+      </div>
     </section>
 
     <% if user_signed_in? && current_user == answer.user %>
