@@ -12,23 +12,37 @@
               <%= nav_tab i18n_model_name(Question.new, count: 2), 
                 questions_path, class: "nav-link px-4", current_page: current_page %>
             </li>
+            <li class="nav-item">
+              <%= nav_tab t('page.new', model: i18n_model_name(Question.new).downcase), 
+                new_user_question_path(current_user), class: "nav-link px-4", current_page: current_page if user_signed_in? %>
+            </li>
+          </ul>
+          <ul class='nav col-12 col-lg-auto mb-2 mb-md-0'>
             <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= nav_tab t('page.new', model: i18n_model_name(Question.new).downcase), 
-                  new_user_question_path(current_user), class: "nav-link px-4", current_page: current_page %>
-              </li>
-              <li class="nav-item">
-                <%= nav_tab t('nav.sign_out'), sign_out_path, 
-                'data- turbo_method': :delete, :onclick => "return confirm('Are you sure?')", 
-                :remote => true, class: "nav-link px-4", current_page: current_page %>
+              <li class=" dropdown nav-item">
+                <%= nav_tab current_user.name_or_email, 
+                  '#', class: "nav-link px-4 dropdown-toggle",
+                  data: {'bs-toggle': 'dropdown'}, current_page: current_page %>
+                <ul class='dropdown-menu'>
+                  <li>
+                    <%= link_to t('nav.edit_user'), edit_user_path(current_user), 
+                      class: "dropdown-item" %>
+                  </li>
+                  <li><hr class='dropdown-devider'></li>
+                  <li>
+                    <%= button_to t('nav.sign_out'), session_path, method: :delete, form: {turbolink: false}, 
+                      :onclick => "return confirm('Are you sure?')", :remote => true, 
+                      class: "dropdown-item" %>
+                  </li>
+                </ul>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= nav_tab t('nav.sign_in'), sign_in_path, class: "nav-link px-4",
+                <%= nav_tab t('nav.sign_in'), new_session_path, class: "nav-link px-4",
                   current_page: current_page %>
               </li>
               <li class="nav-item">
-                <%= nav_tab t('nav.sign_up'), sign_up_path, class: "nav-link px-4",
+                <%= nav_tab t('nav.sign_up'), new_user_path, class: "nav-link px-4",
                   current_page: current_page %>
               </li>
             <% end %>
