@@ -34,7 +34,7 @@ gem "redis", "~> 4.0"
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -49,13 +49,13 @@ gem "sassc-rails"
 # gem "image_processing", "~> 1.2"
 
 gem 'rails-i18n', '~> 7.0.0'
-gem 'devise'
-gem 'devise-i18n'
+
 gem 'simple_form'
 gem "jsbundling-rails", "~> 1.0"
 gem "cssbundling-rails", "~> 1.1"
-
-gem 'kaminari', '~> 1.2.2'
+gem 'pagy', '~> 5.10.1'
+gem 'draper', '~> 4.0'
+gem "valid_email2", '~> 4.0.4'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -64,6 +64,9 @@ group :development, :test do
   # gem for ENV
   gem "figaro"
   gem 'faker', '~> 3'
+  gem 'rubocop', '~> 1.40', require: false
+  gem 'rubocop-rails', '~> 2.17', require: false
+  gem 'rubocop-performance', '~> 1.15', require: false
 end
 
 group :development do
