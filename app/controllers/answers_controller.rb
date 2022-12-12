@@ -1,14 +1,15 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :require_authentication
+  include ActionView::RecordIdentifier
   before_action :define_variables!, only: %i[create]
   before_action :define_answer!, only: %i[edit update destroy]
 
   def create
     @answer = @question.answers.build(answer_params)
-    @answer.user = @user 
+    @answer.user = @user
 
     if @answer.save
-      redirect_to question_path(@question, anchor: "answer-#{@answer.id}"),
+      redirect_to question_path(@question, anchor: dom_id(@answer)),
         success: I18n.t('flash.new', model: i18n_model_name(@answer).downcase)
     else
       redirect_to question_path(@question), 
@@ -43,7 +44,7 @@ class AnswersController < ApplicationController
 
   def define_variables!
       @question = Question.find(params[:question_id])
-      @user = current_user
+      @user = current_user.decorate
     end
 
     def define_answer!
