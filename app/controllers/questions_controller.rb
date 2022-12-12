@@ -1,15 +1,19 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :require_authentication, except: %i[index show]
   before_action :define_user!, only: %i[new create]
   before_action :define_question!, except: %i[new create index]
 
   def index
-    @questions = Question.order(created_at: :desc).page(params[:page]).per(4)
+    @pagy, @questions = pagy Question.order(created_at: :desc), items: 4
+    @questions = @questions.decorate
   end
 
+
   def show
+    @question = @question.decorate
     @answer = @question.answers.build
-    @answers = @question.answers.order(created_at: :desc).page(params[:page]).per(3)
+    @pagy, @answers = pagy @question.answers.order(created_at: :desc), items: 3
+    @answers = @answers.decorate
   end
 
   def new
