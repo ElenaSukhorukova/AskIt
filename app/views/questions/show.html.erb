@@ -12,7 +12,7 @@
       </time>
     </small>
     <%= attribute_model(@question, :user) %>
-    <strong><%= @question.user.username %></strong>
+    <strong><%= @question.user.name_or_email %></strong>
   </p>
   <div class='lead my-3'>
     <%= sanitize @question.body %>
@@ -29,19 +29,21 @@
 </section>
 <hr class='my-3'>
 <section class='col-8'>
-  <%= render partial: 'answers/form', locals: { model: [@question, @answer], method: :post } %>
+  <% if user_signed_in? %>
+    <%= render partial: 'answers/form', locals: { model: [@question, @answer], method: :post } %>
+  <% end %>
   
   <% if @answers.try(:any?) %>
   
-    <div class='my-3 text-center'>
-      <%= paginate @answers %>
+    <div class='my-4'>
+      <%== pagination @pagy %>
     </div>
 
     <h2 class='mt-4'><%= i18n_model_name(@answer, count: 2) %></h2>
     <%= render @answers %>
   
-    <div class='my-3 text-center'>
-      <%= paginate @answers %>
+    <div class='my-4'>
+      <%== pagination @pagy %>
     </div>
   <% end %> 
 </section>
