@@ -9,10 +9,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by email: params[:session][:email]
     if user&.authenticate(params[:session][:password])
-      sign_in user
-      remember(user) if params[:remember_me] == '1'
-      redirect_to root_path,
-                  success: I18n.t('flash.session_success', username: current_user.name_or_email)
+      do_sign_in user
     else
       render :new, status: :unprocessable_entity
       flash[:warning] = I18n.t('flash.session_error')
@@ -23,5 +20,14 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_path,
                 success: I18n.t('flash.session_destroy')
+  end
+
+  private
+
+  def do_sign_in(user)
+    sign_in user
+    remember(user) if params[:remember_me] == '1'
+    redirect_to root_path,
+                success: I18n.t('flash.session_success', username: current_user.name_or_email)
   end
 end

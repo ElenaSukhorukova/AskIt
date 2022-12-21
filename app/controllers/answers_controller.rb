@@ -9,8 +9,7 @@ class AnswersController < ApplicationController
   def edit; end
 
   def create
-    @answer = @question.answers.build(answer_params)
-    @answer.user = @user
+    build_answer
 
     if @answer.save
       redirect_to question_path(@question, anchor: dom_id(@answer)),
@@ -49,6 +48,11 @@ class AnswersController < ApplicationController
 
   def define_answer!
     @answer = Answer.find(params[:id])
+  end
+
+  def build_answer
+    @answer = @question.answers.build answer_params
+    @answer.user = @user
   end
 
   def answer_params
