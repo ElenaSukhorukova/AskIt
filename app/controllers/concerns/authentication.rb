@@ -1,7 +1,7 @@
 module Authentication
   extend ActiveSupport::Concern
 
-  included do 
+  included do
     private
 
     def current_user
@@ -13,7 +13,7 @@ module Authentication
           sign_in user
           @current_user ||= user.decorate
         end
-      end 
+      end
     end
 
     def remember(user)
@@ -46,16 +46,16 @@ module Authentication
       return unless user_signed_in?
 
       redirect_to root_path,
-        warning: I18n.t('flash.already_signed_in')
+                  warning: I18n.t('flash.already_signed_in')
     end
 
     def require_authentication
       return if user_signed_in?
-      
+
       redirect_to root_path,
-        warning: I18n.t('flash.should_signed_in')
+                  warning: I18n.t('flash.should_signed_in')
     end
-    
+
     helper_method :current_user, :user_signed_in?
   end
 end

@@ -19,7 +19,7 @@
           </ul>
           <ul class='nav col-12 col-lg-auto mb-2 mb-md-0'>
             <% if user_signed_in? %>
-              <li class=" dropdown nav-item">
+              <li class="dropdown nav-item">
                 <%= nav_tab current_user.name_or_email, 
                   '#', class: "nav-link px-4 dropdown-toggle",
                   data: {'bs-toggle': 'dropdown'}, current_page: current_page %>
@@ -28,7 +28,7 @@
                     <%= link_to t('nav.edit_user'), edit_user_path(current_user), 
                       class: "dropdown-item" %>
                   </li>
-                  <li><hr class='dropdown-devider'></li>
+                  <li><hr class='dropdown-divider'></li>
                   <li>
                     <%= button_to t('nav.sign_out'), session_path, method: :delete, form: {turbolink: false}, 
                       :onclick => "return confirm('Are you sure?')", :remote => true, 

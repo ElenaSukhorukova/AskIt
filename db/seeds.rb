@@ -1,6 +1,6 @@
 (5 - User.count).times do |index|
   username = [Faker::Address.full_address, ''].sample
-  email = "email#{index+1}@email.com"
+  email = "email#{index + 1}@email.com"
   password = '123Test123!'
 
   User.create username: username, email: email, password: password
@@ -10,10 +10,8 @@ end
   user_id = User.ids.sample
   title = Faker::Hipster.sentence(word_count: 3)
   body = Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 4)
-  
-  unless Question.find_by(title: title, body: body)
-    Question.create title: title, body: body, user_id: user_id
-  end
+
+  Question.create title: title, body: body, user_id: user_id unless Question.find_by(title: title, body: body)
 end
 
 Question.all.each do |question|

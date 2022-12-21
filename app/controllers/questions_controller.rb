@@ -8,7 +8,6 @@ class QuestionsController < ApplicationController
     @questions = @questions.decorate
   end
 
-
   def show
     @question = @question.decorate
     @answer = @question.answers.build
@@ -20,51 +19,49 @@ class QuestionsController < ApplicationController
     @question = @user.questions.build
   end
 
+  def edit; end
+
   def create
-    @question = @user.questions.build(question_params)
+    @question = @user.questions.build question_params
 
     if @question.save
-      redirect_to question_path(@question), 
-        success: I18n.t('flash.new', model: i18n_model_name(@question).downcase)
+      redirect_to question_path(@question),
+                  success: I18n.t('flash.new', model: i18n_model_name(@question).downcase)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
-
   def update
-    if @question.user == current_user
-      if @question.update(question_params)
-        redirect_to questions_path, 
-          success: I18n.t('flash.update', model: i18n_model_name(@question).downcase)
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    return unless @question.user == current_user
+
+    if @question.update question_params
+      redirect_to questions_path,
+                  success: I18n.t('flash.update', model: i18n_model_name(@question).downcase)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if @question.user == current_user
-      if @question.destroy
-        redirect_to questions_path, 
-          success: I18n.t('flash.destroy', model: i18n_model_name(@question).downcase)
-      end
-    end
+    return unless @question.user == current_user
+    return unless @question.destroy
+
+    redirect_to questions_path,
+                success: I18n.t('flash.destroy', model: i18n_model_name(@question).downcase)
   end
 
   private
 
-    def define_user!
-      @user = User.find(params[:user_id])
-    end
+  def define_user!
+    @user = User.find params[:user_id]
+  end
 
-    def define_question!
-      @question = Question.find(params[:id])
-    end
+  def define_question!
+    @question = Question.find params[:id]
+  end
 
-    def question_params
-      params.require(:question).permit(:title, :body)
-    end
+  def question_params
+    params.require(:question).permit(:title, :body)
+  end
 end

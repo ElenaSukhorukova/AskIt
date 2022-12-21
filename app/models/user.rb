@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :old_password, :remember_token
+
   has_secure_password validations: false
 
   validate :password_presence
@@ -7,7 +8,7 @@ class User < ApplicationRecord
   validate :password_complexity
   validate :correct_old_password, on: :update, if: -> { password.present? }
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': { mx: true }
-  
+
   def remember_me
     self.remember_token = SecureRandom.urlsafe_base64
     update_column :remember_token_digest, digest(remember_token)
@@ -20,13 +21,13 @@ class User < ApplicationRecord
 
   def remember_token_authenticated?(remember_token)
     return false unless remember_token_digest.present?
+
     BCrypt::Password.new(remember_token_digest).is_password?(remember_token)
   end
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
 
-   
   private
 
   def digest(string)
@@ -43,8 +44,9 @@ class User < ApplicationRecord
   def password_complexity
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$/
-  
-    errors.add :password, 'complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
+
+    errors.add :password,
+               'complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
   end
 
   def password_presence
