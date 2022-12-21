@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
   before_action :require_authentication
   include ActionView::RecordIdentifier
@@ -15,7 +17,7 @@ class AnswersController < ApplicationController
                   success: I18n.t('flash.new', model: i18n_model_name(@answer).downcase)
     else
       redirect_to question_path(@question),
-                  danger: "#{@answer.errors.full_messages.each { |error| error.capitalize }.join(' ')}"
+                  danger: @answer.errors.full_messages.each(&:capitalize).join(' ').to_s
     end
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
   before_action :require_authentication, except: %i[index show]
   before_action :define_user!, only: %i[new create]
