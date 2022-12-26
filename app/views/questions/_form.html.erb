@@ -6,8 +6,8 @@
     <%= f.input :body, required: true, minlength: 2, 
         placeholder: attribute_model(Question.new, :body), 
         input_html: { class: 'mb-2' } %>
-    <%= f.button :submit, f.object.new_record? ? t('submit.new') :
-         t('submit.edit'), class: "btn btn-primary mt-2" %> 
+    <%= f.button :submit, f.object.new_record? ? t('submit.new') : t('submit.edit'), 
+                          class: "btn btn-primary mt-2" %> 
     <%= render partial: 'shared/cancel_button', 
       locals: { path: question_path(f.object) } if f.object.persisted? %>	
   <% end %>

@@ -8,7 +8,7 @@
           </time>
         </small>
         <%= attribute_model(answer, :user) %>
-        <strong><%= answer.user.name_or_email %></strong>
+        <strong><%= answer.user.decorate.name_or_email %></strong>
       </p>
       <div class='mt-2 mb-3'>
         <strong><%= attribute_model(answer, :body) %></strong>

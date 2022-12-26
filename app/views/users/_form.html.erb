@@ -12,8 +12,8 @@
   <%= f.input :password_confirmation, placeholder: attribute_model(f.object, :password_confirmation), 
                      input_html: { class: 'mb-2' } %>
 
-  <%= f.button :submit, f.object.new_record? ? t('submit.new') :
-         t('submit.edit'), class: "btn btn-primary mt-2" %> 
+  <%= f.button :submit, f.object.new_record? ? t('submit.new') : t('submit.edit'), 
+              class: "btn btn-primary mt-2" %> 
   <%= render partial: 'shared/cancel_button', 
       locals: { path: user_path(f.object) } if f.object.persisted? %>	
 <% end %>
