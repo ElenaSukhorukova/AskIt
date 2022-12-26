@@ -2,18 +2,20 @@
 
 Rails.application.routes.draw do
   resource :session, only: %i[new create destroy]
-  resources :users, only: %i[new create new update]
 
-  get 'pages/index'
   root to: 'pages#index'
 
   shallow do
-    resources :users do
+    resources :users, only: %i[new create edit update] do
       resources :questions
     end
     resources :questions do
       resources :answers, only: %i[create edit update destroy]
     end
+  end
+
+  namespace :admin do 
+    resources :users, only:  %i[index create]
   end
 
   resources :questions, only: %i[index show]
