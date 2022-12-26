@@ -25,6 +25,8 @@ en:
         password: 'Password'
         password_confirmation: 'Password confirmation'
         remember_me: 'Remember me'
+        created_at: 'Created at'
+        updated_at: 'Updated at'
   page:
     site_name: 'AskIt'
     home: 'Home'
@@ -34,6 +36,9 @@ en:
     telegram: "&#9990; @elenkasu"
     registration: 'Registration'
     session: 'Log in'
+    admin:
+      title: 'Admin Users'
+      upload: 'Upload users from XLSX'
   nav:
     sign_up: 'Sign up'
     sign_in: 'Log in'
@@ -47,6 +52,7 @@ en:
     cancel: 'Cancel'
     sign_up: 'Sign up'
     log_in: 'Log in'
+    upload: 'Upload'
   flash:
     new: "The %{model} was saved successfully"
     update: "The %{model} was updated successfully"
@@ -57,7 +63,9 @@ en:
     session_destroy: 'See you later'
     already_signed_in: 'You already signed in'
     should_signed_in: 'You should sign in'
+    imported: 'Users were imported!'
   link:
     new: 'Create a new %{model}'
     edit: "Edit the %{model}"
     show: "Show the %{model}"
+    zip: 'Download zipped XLSX'
