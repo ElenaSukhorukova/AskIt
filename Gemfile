@@ -58,6 +58,11 @@ gem 'jsbundling-rails', '~> 1.0'
 gem 'pagy', '~> 5.10.1'
 gem 'simple_form'
 gem 'valid_email2', '~> 4.0.4'
+gem 'rubyzip', '~> 2.3', '>= 2.3.2', require: 'zip'
+gem 'caxlsx', '~> 3.3'
+gem 'caxlsx_rails', '~> 0.6.3'
+gem 'rubyXL', '~> 3.3', '>= 3.3.21'
+gem 'activerecord-import', '~> 1.4', '>= 1.4.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -69,6 +74,7 @@ group :development, :test do
   gem 'rubocop', '~> 1.40', require: false
   gem 'rubocop-performance', '~> 1.15', require: false
   gem 'rubocop-rails', '~> 2.17', require: false
+  gem 'pry-rails', '~> 0.3.9'
 end
 
 group :development do
