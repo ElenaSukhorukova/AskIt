@@ -1,0 +1,32 @@
+<% provide :page_title, t('page.registration') %>
+<% currently_at i18n_model_name(User.new) %>
+
+<h1 class='mb-4'><%= t('page.admin.title') %></h1>
+
+<div class='btn-group mb-3'>
+  <%= link_to t('link.zip'), admin_users_path(format: :zip), class: "btn btn-primary mt-2"   %>
+</div>
+
+<table id='customers'>
+  <thead>
+    <tr>
+      <th scope='col'>#</th>
+      <th scope='col'><%= attribute_model(User.new, :username) %></th>
+      <th scope='col'><%= attribute_model(User.new, :email) %></th>
+      <th scope='col'><%= attribute_model(User.new, :created_at) %></th>
+      <th scope='col'><%= attribute_model(User.new, :updated) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @users %>
+  </tbody>
+</table>
+
+<%== pagination @pagy %>
+
+<h2 class='my-3'><%= t('page.admin.upload') %></h2>
+
+<%= simple_form_for(:archive, url: admin_users_path) do |f| %>
+  <%= f.input :archive, as: :file, required: true, input_html: {class: 'form-control'} %>
+  <%= f.button :submit, t('submit.upload'), class: "btn btn-primary mt-2"%>
+<% end %>
