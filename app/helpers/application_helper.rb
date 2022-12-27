@@ -7,7 +7,7 @@ module ApplicationHelper
     pagy_bootstrap_nav(obj) if obj.pages > 1
   end
 
-  def i18n_model_name(model, count: 1)
+  def i18n_model_name(model, count = 1)
     model.model_name.human(count: count)
   end
 
@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def full_title(page_title = '')
-    base_title = t('page.site_name')
+    base_title = t('site_name')
     page_title ? "#{page_title} | #{base_title}" : base_title.to_s
   end
 
@@ -34,5 +34,9 @@ module ApplicationHelper
                       end
 
     link_to title, url, options
+  end
+
+  def params_plus(additional_params)
+    params.to_unsafe_h.merge(additional_params)
   end
 end
