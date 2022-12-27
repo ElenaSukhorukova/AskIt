@@ -1,0 +1,99 @@
+ru:
+  en: Английский
+  ru: Русский
+  activerecord:
+    models:
+      question:
+        one: Вопрос
+        few: Вопросы
+        many: Вопросы
+        other: Вопросы
+      answer:
+        one: Ответ
+        few: Ответы
+        many: Ответы
+        other: Ответы
+      user:
+        few: Пользователя
+        many: Пользователей
+        one: Пользователь
+        other: Пользователи
+    attributes:
+      question:
+        title: Заголовок
+        body: Текст
+        user: Автор
+      answer:
+        body: Текст
+        user: Автор
+      user:
+        username: Имя пользователя
+        email: Электронная почта
+        old_password: Старый пароль
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        remember_me: Запомнить меня'
+        created_at: Создан
+        updated_at: Обновлен
+  site_name: AskIt
+  pages:
+    index:
+      title: Добро пожаловать в AskIt!
+  questions:
+    new:
+      title: Новый вопрос
+    edit:
+      title: Редактирование вопроса
+  answers:
+    new:
+      title: Новый ответ
+    edit:
+      title: Редактирование ответа
+  admin:
+    users:
+      index:
+        title: Администратор пользователей
+        upload: Загрузить пользователей из XLSX
+  sessions:
+    new:
+      title: Вход
+  users:
+    new:
+      title: Регистрация нового пользователя
+    edit:
+      title: Редактирование профиля пользователя
+  menu:
+    home: Главная
+    question: Новый вопрос
+    admin_page: Страница администратора
+    sign_up: Регистрация
+    sign_in: Вход
+    sign_out: Выход
+    edit_user: Редактировать профиль
+    telegram: "&#9990; @elenkasu"
+  submit:
+    new: Создать
+    edit: Редактировать
+    destroy: Удалить
+    go_back: "&larr; Вернуться"
+    cancel: Отменить
+    sign_up: Зарегестрироваться
+    log_in: Войти
+    upload: Загрузить
+  flash:
+    new: "%{model} успешно сохранен"
+    update: "%{model} успешно обновлен"
+    destroy: "%{model} успешно удален"
+    registration: "%{username} успешно прошел регистрацию"
+    session_success: "%{username} успешно вошел"
+    session_error: Некорректная почта и/или пароль
+    session_destroy: Увидимся позже
+    already_signed_in: Вы уже вошли в ваш профиль
+    should_signed_in: Вы должны зайти в ваш профиль
+    imported: Пользователи импортированы успешно
+  link:
+    new: "Добавить новый %{model}"
+    edit: Редактировать
+    show: Показать
+    zip: Скачать заархивированный XLSX
+    

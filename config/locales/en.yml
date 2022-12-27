@@ -1,71 +1,92 @@
 en:
+  en: English
+  ru: Russian
   activerecord:
     models:
       question:
-        one: 'Question'
-        other: 'Questions'
+        one: Question
+        other: Questions
       answer:
-        one: 'Answer'
-        other: 'Answers'
+        one: Answer
+        other: Answers
       user:
-        one: 'User'
-        other: 'Users'
+        one: User
+        other: Users
     attributes:
       question:
-        title: 'Title'
-        body: 'Question'
-        user: 'Author:'
+        title: Title
+        body: Question
+        user: Author
       answer:
-        body: 'Answer'
-        user: 'Author:'
+        body: Answer
+        user: Author
       user:
-        username: 'Name of a user'
-        email: 'Email'
-        old_password: 'Old password'
-        password: 'Password'
-        password_confirmation: 'Password confirmation'
-        remember_me: 'Remember me'
-        created_at: 'Created at'
-        updated_at: 'Updated at'
-  page:
-    site_name: 'AskIt'
-    home: 'Home'
-    greeting: 'Welcome to AskIt!'
-    new: 'A new %{model}'
-    edit: 'Edit the %{model}'
-    telegram: "&#9990; @elenkasu"
-    registration: 'Registration'
-    session: 'Log in'
-    admin:
-      title: 'Admin Users'
-      upload: 'Upload users from XLSX'
-  nav:
-    sign_up: 'Sign up'
-    sign_in: 'Log in'
-    sign_out: 'Sign out'
-    edit_user: 'Edit profile'
+        username: Name of a user
+        email: Email
+        old_password: Old password
+        password: Password
+        password_confirmation: Password confirmation
+        remember_me: Remember me
+        created_at: Created at
+        updated_at: Updated at
+  site_name: AskIt
+  pages:
+    index:
+      title: Welcome to AskIt!
+  questions:
+    new:
+      title: A new question
+    edit:
+      title: Edit the question
+  answers:
+    new:
+      title: A new answer
+    edit:
+      title: Edit the answer
+  admin:
+    users:
+      index:
+        title: Admin Users
+        upload: Upload users from XLSX
+  sessions:
+    new:
+      title: Log in
+  users:
+    new:
+      title: Registration of a new user
+    edit:
+      title: Edition of users' profile
+  menu:
+    home: Home
+    question: A new question
+    admin_page: Admin page
+    sign_up: Sign up
+    sign_in: Log in
+    sign_out: Sign out
+    edit_user: Edit profile
+    telegram: "&#9990; @elenkasu" 
   submit:
-    new: 'Create'
-    edit: 'Edit'
-    destroy: "Destroy"
+    new: Create
+    edit: Edit
+    destroy: Destroy
     go_back: "&larr; Go back"
-    cancel: 'Cancel'
-    sign_up: 'Sign up'
-    log_in: 'Log in'
-    upload: 'Upload'
+    cancel: Cancel
+    sign_up: Sign up
+    log_in: Log in
+    upload: Upload
   flash:
     new: "The %{model} was saved successfully"
     update: "The %{model} was updated successfully"
     destroy: "The %{model} was deleted successfully"
     registration: "%{username} passed registration successfully"
     session_success: "%{username} entered successfully"
-    session_error: 'Incorrect email and/or password'
-    session_destroy: 'See you later'
-    already_signed_in: 'You already signed in'
-    should_signed_in: 'You should sign in'
-    imported: 'Users were imported!'
+    session_error: Incorrect email and/or password
+    session_destroy: See you later
+    already_signed_in: You already signed in
+    should_signed_in: You should sign in
+    imported: Users were imported
   link:
-    new: 'Create a new %{model}'
-    edit: "Edit the %{model}"
-    show: "Show the %{model}"
-    zip: 'Download zipped XLSX'
+    new: "Add a new %{model}"
+    edit: Edit
+    show: Show
+    zip: Download zipped XLSX
