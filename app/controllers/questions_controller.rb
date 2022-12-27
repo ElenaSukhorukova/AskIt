@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
 
     if @question.save
       redirect_to question_path(@question),
-                  success: I18n.t('flash.new', model: i18n_model_name(@question).downcase)
+                  success: I18n.t('flash.new', model: flash_for_locates(@question))
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
 
     if @question.update question_params
       redirect_to questions_path,
-                  success: I18n.t('flash.update', model: i18n_model_name(@question).downcase)
+                  success: I18n.t('flash.update', model: flash_for_locates(@question))
     else
       render :edit, status: :unprocessable_entity
     end
@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
     return unless @question.destroy
 
     redirect_to questions_path,
-                success: I18n.t('flash.destroy', model: i18n_model_name(@question).downcase)
+                success: I18n.t('flash.destroy', model: flash_for_locates(@question))
   end
 
   private

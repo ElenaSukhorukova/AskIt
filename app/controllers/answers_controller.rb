@@ -13,12 +13,11 @@ class AnswersController < ApplicationController
 
     if @answer.save
       return redirect_to question_path(@question, anchor: dom_id(@answer)),
-                  success: I18n.t('flash.new', model: i18n_model_name(@answer).downcase)
+                         success: I18n.t('flash.new', model: flash_for_locates(@answer))
     end
 
     redirect_to question_path(@question),
                 danger: @answer.errors.full_messages.each(&:capitalize).join(' ').to_s
-    
   end
 
   def update
@@ -26,7 +25,7 @@ class AnswersController < ApplicationController
 
     if @answer.update answer_params
       redirect_to question_path(@answer.question),
-                  success: I18n.t('flash.update', model: i18n_model_name(@answer).downcase)
+                  success: I18n.t('flash.update', model: flash_for_locates(@answer))
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,7 +36,7 @@ class AnswersController < ApplicationController
     return unless @answer.destroy
 
     redirect_to question_path(@answer.question),
-                success: I18n.t('flash.destroy', model: i18n_model_name(@answer).downcase)
+                success: I18n.t('flash.destroy', model: flash_for_locates(@answer))
   end
 
   private

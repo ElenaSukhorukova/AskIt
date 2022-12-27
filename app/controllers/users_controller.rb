@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def update
     if @user.update user_params
       redirect_to root_path,
-                  success: I18n.t('flash.update', model: i18n_model_name(@user).downcase)
+                  success: I18n.t('flash.update', model: flash_for_locates(@user))
     else
       render :edit, status: :unprocessable_entity
     end
