@@ -52,17 +52,17 @@ gem 'sassc-rails'
 
 gem 'rails-i18n', '~> 7.0.0'
 
+gem 'activerecord-import', '~> 1.4', '>= 1.4.1'
+gem 'caxlsx', '~> 3.3'
+gem 'caxlsx_rails', '~> 0.6.3'
 gem 'cssbundling-rails', '~> 1.1'
 gem 'draper', '~> 4.0'
 gem 'jsbundling-rails', '~> 1.0'
 gem 'pagy', '~> 5.10.1'
+gem 'rubyXL', '~> 3.3', '>= 3.3.21'
+gem 'rubyzip', '~> 2.3', '>= 2.3.2', require: 'zip'
 gem 'simple_form'
 gem 'valid_email2', '~> 4.0.4'
-gem 'rubyzip', '~> 2.3', '>= 2.3.2', require: 'zip'
-gem 'caxlsx', '~> 3.3'
-gem 'caxlsx_rails', '~> 0.6.3'
-gem 'rubyXL', '~> 3.3', '>= 3.3.21'
-gem 'activerecord-import', '~> 1.4', '>= 1.4.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -71,10 +71,10 @@ group :development, :test do
   # gem for ENV
   gem 'faker', '~> 3'
   gem 'figaro'
+  gem 'pry-rails', '~> 0.3.9'
   gem 'rubocop', '~> 1.40', require: false
   gem 'rubocop-performance', '~> 1.15', require: false
   gem 'rubocop-rails', '~> 2.17', require: false
-  gem 'pry-rails', '~> 0.3.9'
 end
 
 group :development do

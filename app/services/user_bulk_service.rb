@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class UserBulkService < ApplicationService
   attr_reader :archive
 
-  def initialize(archive_param)      
+  def initialize(archive_param)
     @archive = archive_param.tempfile
   end
 
