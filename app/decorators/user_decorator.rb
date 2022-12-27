@@ -9,4 +9,8 @@ class UserDecorator < ApplicationDecorator
 
     email.split('@')[0].capitalize
   end
+
+  def formatted_updated_at
+    l updated_at, format: :long
+  end
 end
