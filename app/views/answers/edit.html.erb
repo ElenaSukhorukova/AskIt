@@ -1,9 +1,8 @@
 <section class='col-8'>
-  <% provide :page_title, t('page.edit', model: i18n_model_name(@answer).downcase) %>
+  <% provide :page_title, t('.title') %>
   <% currently_at %>
   
-  <h1 class='md-2'><%= t('page.edit', model: i18n_model_name(@answer).downcase) %></h1>
-
+  <h1 class='md-2'><%= t('.title') %></h1>
   <%= render partial: 'form', locals: { model: @answer, method: :put } %>
 </section>
 

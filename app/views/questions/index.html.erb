@@ -1,10 +1,10 @@
 <section>
-  <% provide :page_title, i18n_model_name(@questions.last, count: 2) %>
-  <% currently_at i18n_model_name(@questions.last, count: 2) %>
+  <% provide :page_title, i18n_model_name(Question.new, 2) %>
+  <% currently_at i18n_model_name(Question.new, 2) %>
 
-  <h1 class='md-4'><%= i18n_model_name(@questions.last, count: 2) %></h2>
+  <h1 class='md-4'><%= i18n_model_name(Question.new, 2) %></h2>
 
-  <%= link_to t('link.new', model: i18n_model_name(@questions.last).downcase), 
+  <%= link_to t('link.new', model: i18n_model_name(Question.new).downcase), 
     new_user_question_path(current_user), class: 'btn btn-info me-2' if user_signed_in? %>
 
   <div class='my-4'>
@@ -22,7 +22,7 @@
               <time datetime="<%= question.formatted_created_at %>">
                 <%= question.formatted_created_at %>
               </time>
-              <%= i18n_model_name(Answer.new, count: 2) %>:
+              <%= i18n_model_name(Answer.new, 2) %>:
               <%= question.answers.count %>
               <%= attribute_model(question, :user) %>
               <strong><%= question.user.name_or_email %></strong>
@@ -33,8 +33,7 @@
             </p>
           </section>
             <div class="btn-group" role="group">
-              <%= link_to t('link.show', model: i18n_model_name(question).downcase), 
-                question_path(question), class: 'btn btn-primary me-2' %>
+              <%= link_to t('link.show'), question_path(question), class: 'btn btn-primary me-2' %>
             </div>
         </div>
       </article>

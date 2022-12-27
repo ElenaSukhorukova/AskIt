@@ -5,19 +5,25 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
             <li class="nav-item">
-              <%= nav_tab t('page.home'), root_path, class: "nav-link px-4", 
+              <%= nav_tab t('menu.home'), root_path, class: "nav-link px-4", 
                 current_page: current_page %>
             </li>
             <li class="nav-item">
-              <%= nav_tab i18n_model_name(Question.new, count: 2), 
+              <%= nav_tab i18n_model_name(Question.new, 2), 
                 questions_path, class: "nav-link px-4", current_page: current_page %>
             </li>
-            <li class="nav-item">
-              <%= nav_tab t('page.new', model: i18n_model_name(Question.new).downcase), 
-                new_user_question_path(current_user), class: "nav-link px-4", current_page: current_page if user_signed_in? %>
-            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= nav_tab t('menu.question'), new_user_question_path(current_user), 
+                  class: "nav-link px-4", current_page: current_page %>
+              </li>
+              <li class="nav-item">
+                <%= nav_tab t('menu.admin_page'), admin_users_path, current_page: current_page, 
+                    class: "nav-link px-4" %>
+              </li>
+            <% end %>
           </ul>
-          <ul class='nav col-12 col-lg-auto mb-2 mb-md-0'>
+          <ul class='nav col-12 col-lg-auto mb-2 mb-md-2'>
             <% if user_signed_in? %>
               <li class="dropdown nav-item">
                 <%= nav_tab current_user.name_or_email, 
@@ -25,12 +31,12 @@
                   data: {'bs-toggle': 'dropdown'}, current_page: current_page %>
                 <ul class='dropdown-menu'>
                   <li>
-                    <%= link_to t('nav.edit_user'), edit_user_path(current_user), 
+                    <%= link_to t('menu.edit_user'), edit_user_path(current_user), 
                       class: "dropdown-item" %>
                   </li>
                   <li><hr class='dropdown-divider'></li>
                   <li>
-                    <%= button_to t('nav.sign_out'), session_path, method: :delete, form: {turbolink: false}, 
+                    <%= button_to t('menu.sign_out'), session_path, method: :delete, form: {turbolink: false}, 
                       :onclick => "return confirm('Are you sure?')", :remote => true, 
                       class: "dropdown-item" %>
                   </li>
@@ -38,14 +44,35 @@
               </li>
             <% else %>
               <li class="nav-item">
-                <%= nav_tab t('nav.sign_in'), new_session_path, class: "nav-link px-4",
+                <%= nav_tab t('menu.sign_in'), new_session_path, class: "nav-link px-4",
                   current_page: current_page %>
               </li>
               <li class="nav-item">
-                <%= nav_tab t('nav.sign_up'), new_user_path, class: "nav-link px-4",
+                <%= nav_tab t('menu.sign_up'), new_user_path, class: "nav-link px-4",
                   current_page: current_page %>
               </li>
             <% end %>
+          </ul>
+          <ul class='nav col-12 col-lg-auto mb-2 mb-md-2 mx-3'>
+            <li class="dropdown">
+              <%= link_to '#', class: 'nav-link px-2 dropdown-toggle text-white',
+                  data: {'bs-toggle': 'dropdown'} do %>
+                <%= tag.div '', class: "flag #{I18n.locale}-flag mt-1" %>
+                <%= t I18n.locale %>
+              <% end %>
+              <ul class='dropdown-menu'>
+                <% I18n.available_locales.each do |locale| %>
+                  <li>
+                    <% if I18n.locale.to_s == locale %>
+                      <%= tag.span t(locale), class: 'dropdown-item'%>
+                    <% else %>
+                      <%= link_to t(locale), url_for(params_plus(locale: locale)),
+                          class: 'dropdown-item' %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
           </ul>
         </div>
       </nav>

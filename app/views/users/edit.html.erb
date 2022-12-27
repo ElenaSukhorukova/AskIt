@@ -1,9 +1,9 @@
 <section class='col-6'>
-  <% provide :page_title, t('page.edit', model: @user) %>
-  <% currently_at t('nav.edit_user') %>
+  <% provide :page_title, t('.title') %>
+  <% currently_at t('menu.edit_user') %>
   
   <%= render partial: 'shared/go_back_button', locals: { path: root_path } %>
-  <h1 class='md-4'><%= t('page.edit', model: i18n_model_name(@user).downcase) %></h1>
+  <h1 class='md-4'><%= t('.title') %></h1>
 
   <%= render partial: 'form', locals: { model: @user, method: :put } %>
 </section>

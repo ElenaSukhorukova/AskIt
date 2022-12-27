@@ -1,9 +1,9 @@
 <section class='col-8'>
-  <% provide :page_title, t('page.new', model: i18n_model_name(@question).downcase) %>
-  <% currently_at t('page.new', model: i18n_model_name(@question).downcase) %>
+  <% provide :page_title, t('menu.question') %>
+  <% currently_at t('menu.question') %>
   
   <%= render partial: 'shared/go_back_button', locals: { path: questions_path } %>
-  <h1 class='md-4'><%= t('page.new', model: i18n_model_name(@question).downcase) %></h1>
+  <h1 class='md-4'><%= t('.title') %></h1>
 
   <%= render partial: 'form', locals: { model: [@user, @question], method: :post } %>
 </section>
