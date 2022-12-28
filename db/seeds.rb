@@ -25,3 +25,5 @@ Question.all.each do |question|
     Answer.create body: body, user_id: user_id, question_id: question_id
   end
 end
+
+User.find_each { |u| u.send(:set_gravatar_hash); u.save}

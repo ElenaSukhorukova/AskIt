@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validate :correct_old_password, on: :update, if: -> { password.present? }
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': { mx: true }
 
+  before_save :set_gravatar_hash, if: :email_changed?
+
   def remember_me
     self.remember_token = SecureRandom.urlsafe_base64
     # rubocop:disable Rails/SkipsModelValidations
@@ -35,6 +37,13 @@ class User < ApplicationRecord
   has_many :answers, dependent: :destroy
 
   private
+
+  def set_gravatar_hash
+    return unless email.present?
+
+    hash = Digest::MD5.hexdigest email.strip.downcase
+    self.gravatar_hash = hash
+  end
 
   def digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
