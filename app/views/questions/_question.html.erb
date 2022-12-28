@@ -1,0 +1,26 @@
+<article class='card mt-2'>
+  <section class='card-header'>
+    <%= question.user.gravatar %>
+    <%= attribute_model(question, :user) %>
+    <strong><%= question.user.name_or_email %></strong>
+  </section>
+  <div class='card-body'>
+    <h2><%= link_to question.title, question_path(question) %></h2>
+    <section class='card-text'>
+      <small>      
+        <time datetime="<%= question.formatted_created_at %>">
+          <%= question.formatted_created_at %>
+        </time>
+        <%= i18n_model_name(Answer.new, 2) %>:
+        <%= question.answers.count %>
+      </small>
+     
+      <p class='my-2'>
+        <%= truncate strip_tags(question.body), length: 100, omission: '... (continued)' %>
+      </p>
+    </section>
+    <div class="btn-group" role="group">
+      <%= link_to t('link.show'), question_path(question), class: 'btn btn-primary me-2' %>
+    </div>
+  </div>
+</article>

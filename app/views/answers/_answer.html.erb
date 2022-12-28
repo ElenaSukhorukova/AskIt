@@ -1,29 +1,34 @@
-<article class='mb-3 card' id="answer-<%= answer.id %>">
-  <div class='card-body'>
-    <section class='card-text'>
-      <p>
-        <small>
-          <time datetime="<%= answer.formatted_created_at %>">
-            <%= answer.formatted_created_at %>
-          </time>
-        </small>
-        <%= attribute_model(answer, :user) %>
-        <strong><%= answer.user.decorate.name_or_email %></strong>
-      </p>
-      <div class='mt-2 mb-3'>
-        <strong><%= attribute_model(answer, :body) %></strong>
-        <%= sanitize answer.body %>
-      </div>
-    </section>
+<%= tag.article class: 'mb-3 card border-0', id: dom_id(answer) do %>
+  <div class='row g-0'>
+    <div class='col-sm-auto text-sm-center align-self-center'>
+      <%= answer.user.gravatar size: 50, css_class: 'd-block' %>
+      <strong><%= answer.user.name_or_email %></strong>
+    </div>
+    <div class='col-sm'>
+      <div class='card-body'>
+        <section class='card-text mb-3'>
+          <div class='col-sm-9'>
+            <small><time datetime="<%= answer.formatted_created_at %>">
+              <%= answer.formatted_created_at %>
+            </time></small>
+            
+            <div class='mt-2'>
+              <strong><%= attribute_model(answer, :body) %></strong>
+              <%= sanitize answer.body %>
+            </div>
+          </div>
+        </section>
 
-    <% if user_signed_in? && current_user == answer.user %>
-      <div class="btn-group" role="group">
-        <%= link_to t('link.edit'), edit_answer_path(answer),
-        class: "btn btn-secondary me-2 btn-sm" %>
-        <%= button_to t('submit.destroy'), answer_path(answer), 
-            method: :delete, class: "btn btn-danger me-2 btn-sm", 
-            :onclick => "return confirm('Are you sure?')", :remote => true %>
+        <% if user_signed_in? && current_user == answer.user %>
+          <div class="btn-group" role="group">
+            <%= link_to t('link.edit'), edit_answer_path(answer),
+                class: "btn btn-secondary me-2 btn-sm" %>
+            <%= button_to t('submit.destroy'), answer_path(answer), 
+                method: :delete, class: "btn btn-danger me-2 btn-sm", 
+                :onclick => "return confirm('Are you sure?')", :remote => true %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-</article>
+<% end %>
