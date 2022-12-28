@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
   def edit; end
 
   def create
-    build_answer
+    @answer = @question.answers.build answer_create_params
 
     if @answer.save
       return redirect_to question_path(@question, anchor: dom_id(@answer)),
@@ -23,7 +23,7 @@ class AnswersController < ApplicationController
   def update
     return unless @answer.user == current_user
 
-    if @answer.update answer_params
+    if @answer.update answer_update_params
       redirect_to question_path(@answer.question),
                   success: I18n.t('flash.update', model: flash_for_locates(@answer))
     else
@@ -50,12 +50,11 @@ class AnswersController < ApplicationController
     @answer = Answer.find params[:id]
   end
 
-  def build_answer
-    @answer = @question.answers.build answer_params
-    @answer.user = @user
+  def answer_create_params
+    params.require(:answer).permit(:body).merge(user: current_user)
   end
 
-  def answer_params
+  def answer_update_params
     params.require(:answer).permit(:body)
   end
 end
