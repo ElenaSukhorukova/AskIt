@@ -1,0 +1,14 @@
+<% is_current_comment = comment&.for?(commentable) %>
+
+<%= link_to t('questions.show.comments'), "##{html_id}",
+    class: 'btn btn-primary', data: {'bs-toggle': 'collapse'} %>
+
+<%= tag.div class: "collapse #{'show' if is_current_comment} ", id: html_id do %>
+  <%= simple_form_for [commentable, 
+      (is_current_comment ? comment : commentable.comments.build)] do |f| %>
+    <%= f.input :body, as: :text %>
+    <%= f.button :submit, class: "btn btn-primary mt-2" %> 
+  <% end %>
+
+  <%= render commentable.comments.decorate %>
+<% end %>
