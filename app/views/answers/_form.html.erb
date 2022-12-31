@@ -1,5 +1,6 @@
 <%= simple_form_for model, method: method do |f| %>
-  <%= f.input :body, placeholder: attribute_model(f.object, :body), 
+
+  <%= f.input :body, placeholder: attribute_model(f.object, :body),
       input_html: { class: 'mb-2' } %>
   <%= f.button :submit, f.object.new_record? ? t('submit.new') : t('submit.edit'), 
       class: "btn btn-primary mt-2" %>
