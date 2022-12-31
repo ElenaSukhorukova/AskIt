@@ -72,9 +72,6 @@ group :development, :test do
   gem 'faker', '~> 3'
   gem 'figaro'
   gem 'pry-rails', '~> 0.3.9'
-  gem 'rubocop', '~> 1.40', require: false
-  gem 'rubocop-performance', '~> 1.15', require: false
-  gem 'rubocop-rails', '~> 2.17', require: false
 end
 
 group :development do
@@ -86,6 +83,11 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem 'bullet'
+  gem 'rubocop', '~> 1.40', require: false
+  gem 'rubocop-performance', '~> 1.15', require: false
+  gem 'rubocop-rails', '~> 2.17', require: false
 end
 
 group :test do
