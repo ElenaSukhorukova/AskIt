@@ -1,30 +1,32 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+  include QuestionsAnswers
   before_action :require_authentication, except: %i[index show]
-  before_action :define_user!, only: %i[new create]
   before_action :define_question!, except: %i[new create index]
 
   def index
-    @pagy, @questions = pagy Question.order(created_at: :desc), items: 4
+    @pagy, @questions = pagy Question.includes(:user).order(created_at: :desc), items: 4
     @questions = @questions.decorate
   end
 
   def show
-    @question = @question.decorate
     @answer = @question.answers.build
-    @pagy, @answers = pagy @question.answers.order(created_at: :desc), items: 3
+    @question = @question.decorate
+    @pagy, @answers = pagy @question.answers.includes(:user).order(created_at: :desc), items: 3
     @answers = @answers.decorate
+
+    @answer = add_answer_errors(@answer)
   end
 
   def new
-    @question = @user.questions.build
+    @question = current_user.questions.build
   end
 
   def edit; end
 
   def create
-    @question = @user.questions.build question_params
+    @question = current_user.questions.build question_params
 
     if @question.save
       redirect_to question_path(@question),
@@ -55,12 +57,21 @@ class QuestionsController < ApplicationController
 
   private
 
-  def define_user!
-    @user = User.find params[:user_id]
-  end
-
   def define_question!
     @question = Question.find params[:id]
+  end
+
+  def add_answer_errors(answer)
+    return answer unless session[:answer_errors]
+
+    session[:answer_errors].each do |error, error_message|
+      error_message.each do |msg|
+        answer.errors.add error, msg
+      end
+    end
+    session.delete :answer_errors
+
+    answer
   end
 
   def question_params
