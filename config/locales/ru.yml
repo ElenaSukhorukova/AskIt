@@ -1,6 +1,10 @@
 ru:
   en: Английский
   ru: Русский
+  errors:
+    messages:
+      blank: не может быть пустым
+      too_short: слишком короткий (минимум символов)
   activerecord:
     models:
       question:
@@ -18,6 +22,11 @@ ru:
         many: Пользователей
         one: Пользователь
         other: Пользователи
+      comment:
+        few: Комментарии
+        many: Комментарии
+        one: Комментарий
+        other: Комментарии        
     attributes:
       question:
         title: Заголовок
@@ -35,6 +44,8 @@ ru:
         remember_me: Запомнить меня'
         created_at: Создан
         updated_at: Обновлен
+      comment:
+        body: Текст       
   site_name: AskIt
   pages:
     index:
@@ -44,6 +55,8 @@ ru:
       title: Новый вопрос
     edit:
       title: Редактирование вопроса
+    show:
+      comments: Комментарии
   answers:
     new:
       title: Новый ответ
@@ -96,4 +109,5 @@ ru:
     edit: Редактировать
     show: Показать
     zip: Скачать заархивированный XLSX
-    
+  dialogue:
+    you_sure: Вы уверены?

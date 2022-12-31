@@ -1,6 +1,10 @@
 en:
   en: English
   ru: Russian
+  errors:
+    messages:
+      blank: can't be blank
+      too_short: is too short (minimum is 5 characters)
   activerecord:
     models:
       question:
@@ -12,6 +16,9 @@ en:
       user:
         one: User
         other: Users
+      comment:
+        one: Комментарий
+        other: Комментарии   
     attributes:
       question:
         title: Title
@@ -29,6 +36,8 @@ en:
         remember_me: Remember me
         created_at: Created at
         updated_at: Updated at
+      comment:
+        body: Body
   site_name: AskIt
   pages:
     index:
@@ -38,6 +47,8 @@ en:
       title: A new question
     edit:
       title: Edit the question
+    show:
+      comments: Show comments
   answers:
     new:
       title: A new answer
@@ -90,3 +101,5 @@ en:
     edit: Edit
     show: Show
     zip: Download zipped XLSX
+  dialogue:
+    you_sure: Are you sure?
