@@ -19,6 +19,9 @@
     <strong><%= @question.user.name_or_email %></strong>
   </div>
 
+  <%= render 'comments/commentable', commentable: @question, comment: @comment,
+       html_id: 'questionComments' %>
+
   <% if user_signed_in? && current_user == @question.user %>
     <div class='border-top border-bottom py-3'>
       <div class="btn-group" role="group">
