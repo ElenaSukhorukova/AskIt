@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Answer < ApplicationRecord
-  include TimeShow
+  include Commentable
 
   validates :body, presence: true, length: { minimum: 5 }
 
