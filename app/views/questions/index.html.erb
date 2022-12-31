@@ -5,7 +5,7 @@
   <h1 class='md-4'><%= i18n_model_name(Question.new, 2) %></h2>
 
   <%= link_to t('link.new', model: i18n_model_name(Question.new).downcase), 
-    new_user_question_path(current_user), class: 'btn btn-info me-2' if user_signed_in? %>
+    new_question_path, class: 'btn btn-info me-2' if user_signed_in? %>
 
   <div class='my-4'>
     <%== pagination @pagy %>

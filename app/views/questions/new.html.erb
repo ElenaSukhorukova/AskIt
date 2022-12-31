@@ -5,5 +5,5 @@
   <%= render partial: 'shared/go_back_button', locals: { path: questions_path } %>
   <h1 class='md-4'><%= t('.title') %></h1>
 
-  <%= render partial: 'form', locals: { model: [@user, @question], method: :post } %>
+  <%= render partial: 'form', locals: { model: @question, method: :post } %>
 </section>
