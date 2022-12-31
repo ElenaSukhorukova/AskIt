@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
-  before_action :require_authentication
   include ActionView::RecordIdentifier
+  include QuestionsAnswers
+  before_action :require_authentication
   before_action :define_variables!, only: %i[create]
   before_action :define_answer!, only: %i[edit update destroy]
 
@@ -10,14 +11,20 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.build answer_create_params
-
-    if @answer.save
-      return redirect_to question_path(@question, anchor: dom_id(@answer)),
-                         success: I18n.t('flash.new', model: flash_for_locates(@answer))
+    @question = @question.decorate
+    respond_to do |format|
+      if @answer.save
+        format.html do
+          redirect_to question_path(@question, anchor: dom_id(@answer)),
+                      success: I18n.t('flash.new', model: flash_for_locates(@answer))
+        end
+      else
+        session[:answer_errors] = @answer.errors if @answer.errors.any?
+        format.html do
+          redirect_to question_path(@question, anchor: dom_id(@answer))
+        end
+      end
     end
-
-    redirect_to question_path(@question),
-                danger: @answer.errors.full_messages.each(&:capitalize).join(' ').to_s
   end
 
   def update
