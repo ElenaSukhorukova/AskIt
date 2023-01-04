@@ -6,8 +6,10 @@ class QuestionsController < ApplicationController
   before_action :define_question!, except: %i[new create index]
 
   def index
-    @pagy, @questions = pagy Question.includes(:user).order(created_at: :desc), items: 4
+    @pagy, @questions = pagy Question.all_by_tags(params[:tag_ids]), items: 4
     @questions = @questions.decorate
+
+    @tags = Tag.where(id: params[:tag_ids]) if params[:tag_ids]
   end
 
   def show
@@ -15,7 +17,7 @@ class QuestionsController < ApplicationController
     @question = @question.decorate
     @pagy, @answers = pagy @question.answers.includes(:user).order(created_at: :desc), items: 3
     @answers = @answers.decorate
-
+    
     @answer = add_answer_errors(@answer)
   end
 
@@ -75,6 +77,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, tag_ids: [])
   end
 end
