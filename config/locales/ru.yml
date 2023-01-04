@@ -57,6 +57,8 @@ ru:
       title: Редактирование вопроса
     show:
       comments: Комментарии
+    index:
+      search_by_tags: Поиск по тегам
   answers:
     new:
       title: Новый ответ
@@ -93,6 +95,7 @@ ru:
     sign_up: Зарегестрироваться
     log_in: Войти
     upload: Загрузить
+    search: Найти
   flash:
     new: "%{model} успешно сохранен"
     update: "%{model} успешно обновлен"

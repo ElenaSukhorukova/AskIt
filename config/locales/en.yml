@@ -49,6 +49,8 @@ en:
       title: Edit the question
     show:
       comments: Show comments
+    index:
+      search_by_tags: Search by tags
   answers:
     new:
       title: A new answer
@@ -85,6 +87,7 @@ en:
     sign_up: Sign up
     log_in: Log in
     upload: Upload
+    search: Search
   flash:
     new: "The %{model} was saved successfully"
     update: "The %{model} was updated successfully"
