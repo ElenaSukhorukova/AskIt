@@ -63,6 +63,7 @@ gem 'rubyXL', '~> 3.3', '>= 3.3.21'
 gem 'rubyzip', '~> 2.3', '>= 2.3.2', require: 'zip'
 gem 'simple_form'
 gem 'valid_email2', '~> 4.0.4'
+gem 'blueprinter'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
