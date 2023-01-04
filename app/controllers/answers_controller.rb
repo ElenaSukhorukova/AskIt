@@ -12,18 +12,12 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build answer_create_params
     @question = @question.decorate
-    respond_to do |format|
       if @answer.save
-        format.html do
-          redirect_to question_path(@question, anchor: dom_id(@answer)),
-                      success: I18n.t('flash.new', model: flash_for_locates(@answer))
-        end
+        redirect_to question_path(@question, anchor: dom_id(@answer)),
+                    success: I18n.t('flash.new', model: flash_for_locates(@answer))
       else
         session[:answer_errors] = @answer.errors if @answer.errors.any?
-        format.html do
-          redirect_to question_path(@question, anchor: dom_id(@answer))
-        end
-      end
+        load_question_answers do_render: true
     end
   end
 
