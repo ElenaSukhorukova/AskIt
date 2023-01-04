@@ -4,6 +4,18 @@
 
   <h1 class='md-4'><%= i18n_model_name(Question.new, 2) %></h2>
 
+  <section>
+    <h2><%= t('.search_by_tags') %></h2>
+    <%= form_with url: questions_path, method: :get do |f| %>
+      <div class="mb-3">
+      <%= f.collection_select :tag_ids, (@tags || []), :id, :title, {selected: params[:tag_ids]},
+        multiple: true, required: true,
+        class: 'js-multiple-select w-100', data: {'ajax-url': '/api/tags'} %>
+    </div>
+      <%= f.submit t('submit.search'), class: 'btn btn-primary' %>
+    <%end %>
+  </section>
+
   <%= link_to t('link.new', model: i18n_model_name(Question.new).downcase), 
     new_question_path, class: 'btn btn-info me-2' if user_signed_in? %>
 

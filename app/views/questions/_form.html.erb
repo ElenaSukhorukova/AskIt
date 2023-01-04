@@ -1,11 +1,15 @@
 <div class='col-sm-8'>
-  <%= simple_form_for model, method: method do |f| %>
+  <%= simple_form_for model, method: method, multiple: true do |f| %>
     <%= f.input :title, required: true, minlength: 2, 
         placeholder: attribute_model(f.object, :title), 
         input_html: { class: 'mb-2' } %>
-    <%= f.input :body, required: true, minlength: 2, 
+    <%= f.input :body, required: true,
         placeholder: attribute_model(f.object, :body), 
         input_html: { class: 'mb-2' } %>
+    <%= f.collection_select :tag_ids, question.tags, :id, :title, {}, 
+                                      multiple: true,
+                                      class: 'js-multiple-select', 
+                                      data: {'ajax-url': '/api/tags'} %>
     <%= f.button :submit, f.object.new_record? ? t('submit.new') : t('submit.edit'), 
                           class: "btn btn-primary mt-2" %> 
     <%= render partial: 'shared/cancel_button', 

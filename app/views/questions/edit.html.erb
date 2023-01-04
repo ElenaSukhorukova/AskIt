@@ -3,5 +3,5 @@
   <% currently_at %>
   
   <h1 class='md-4'><%= t('.title') %></h1>
-  <%= render partial: 'form', locals: { model: @question, method: :put } %>
+  <%= render partial: 'form', locals: { model: @question, method: :put, tags: @tags } %>
 </section>
