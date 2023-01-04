@@ -30,3 +30,16 @@ User.find_each do |u|
   u.send(:set_gravatar_hash)
   u.save
 end
+
+(40 - Tag.count).times do
+  title = Faker::Hipster.word
+
+  Tag.create title: title
+end
+
+Question.all.each do |question|
+  (4 - question.tags.count).times do
+    tag = Tag.find(Tag.ids.sample)
+    question.tags << tag
+  end
+end
