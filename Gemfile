@@ -51,7 +51,6 @@ gem 'sassc-rails'
 # gem "image_processing", "~> 1.2"
 
 gem 'rails-i18n', '~> 7.0.0'
-
 gem 'activerecord-import', '~> 1.4', '>= 1.4.1'
 gem 'caxlsx', '~> 3.3'
 gem 'caxlsx_rails', '~> 0.6.3'
@@ -63,14 +62,14 @@ gem 'rubyXL', '~> 3.3', '>= 3.3.21'
 gem 'rubyzip', '~> 2.3', '>= 2.3.2', require: 'zip'
 gem 'simple_form'
 gem 'valid_email2', '~> 4.0.4'
-gem 'blueprinter'
+gem 'blueprinter', '~> 0.25.3'
+gem "pundit", "~> 2.3"
+gem 'lokalise_rails', '~> 5.1.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
-
-  # gem for ENV
-  gem 'faker', '~> 3'
+  gem 'debug', platforms: %i[mri mingw x64_mingw] 
+  gem 'faker', '~> 3' # gem for ENV
   gem 'figaro'
   gem 'pry-rails', '~> 0.3.9'
 end

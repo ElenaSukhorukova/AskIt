@@ -120,6 +120,13 @@ GEM
     erubi (1.12.0)
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
+    faraday (2.7.2)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-gzip (1.0.0)
+      faraday (>= 1.0)
+      zlib (~> 2.1)
+    faraday-net_http (3.0.2)
     ffi (1.15.5)
     ffi (1.15.5-x64-mingw32)
     figaro (1.2.0)
@@ -141,6 +148,13 @@ GEM
     jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
     json (2.6.3)
+    lokalise_manager (3.3.0)
+      ruby-lokalise-api (~> 7)
+      rubyzip (~> 2.3)
+      zeitwerk (~> 2.4)
+    lokalise_rails (5.1.0)
+      lokalise_manager (~> 3.2)
+      zeitwerk (~> 2.4)
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -184,6 +198,8 @@ GEM
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
+    pundit (2.3.0)
+      activesupport (>= 3.0.0)
     racc (1.6.2)
     rack (2.2.5)
     rack-test (2.0.2)
@@ -245,6 +261,12 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
+    ruby-lokalise-api (7.1.1)
+      addressable (~> 2.5)
+      faraday (~> 2.0)
+      faraday-gzip (>= 0.1, < 2.0)
+      json (~> 2)
+      zeitwerk (~> 2.4)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     rubyXL (3.4.25)
@@ -309,6 +331,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.6)
+    zlib (2.1.1)
 
 PLATFORMS
   x64-mingw32
@@ -317,7 +340,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import (~> 1.4, >= 1.4.1)
   bcrypt (~> 3.1.7)
-  blueprinter
+  blueprinter (~> 0.25.3)
   bootsnap
   bullet
   capybara
@@ -331,10 +354,12 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jsbundling-rails (~> 1.0)
+  lokalise_rails (~> 5.1.0)
   pagy (~> 5.10.1)
   pg (~> 1.1)
   pry-rails (~> 0.3.9)
   puma (~> 5.0)
+  pundit (~> 2.3)
   rails (~> 7.0.4)
   rails-i18n (~> 7.0.0)
   redis (~> 4.0)
