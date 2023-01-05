@@ -3,7 +3,8 @@
 module Admin
   class UsersController < ApplicationController
     before_action :require_authentication
-
+    before_action :set_user!, only: %i[edit update destroy]
+    
     def index
       respond_to do |format|
         format.html do
@@ -21,6 +22,24 @@ module Admin
       redirect_to admin_users_path, success: t('flash.imported')
     end
 
+    def edit     
+    end
+
+    def update
+      if @user.update user_params
+        redirect_to admin_users_path,
+                    success: I18n.t('flash.update', model: flash_for_locates(@user))
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @user.destroy
+      redirect_to admin_users_path, 
+                  success: I18n.t('flash.destroy', model: flash_for_locates(@user))
+    end
+    
     private
 
     def respond_with_zipped_users
@@ -37,5 +56,15 @@ module Admin
       compressed_filestream.rewind
       send_data compressed_filestream.read, filename: 'users.zip'
     end
+  end
+
+  def set_user!
+    @user = User.find params[:id]
+  end
+
+  def user_params
+    params.require(:user).permit(
+      :username, :email, :password, :password_confirmation, :role
+    ).merge(admin_edit: true)
   end
 end
