@@ -1,6 +1,7 @@
 <%= simple_form_for model, method: method do |f| %>
   <%= f.input :username, placeholder: attribute_model(f.object, :username), 
                         input_html: { class: 'mb-2' } %>
+  <%= f.input :role, readonly: true,  placeholder: t(f.object.role, scope: 'global.user.roles') %>
   <%= f.input :email, placeholder: attribute_model(f.object, :email), 
                     input_html: { class: 'mb-2' } %>
   <% unless f.object.new_record? %>

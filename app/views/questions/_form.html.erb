@@ -6,7 +6,7 @@
     <%= f.input :body, required: true,
         placeholder: attribute_model(f.object, :body), 
         input_html: { class: 'mb-2' } %>
-    <%= f.collection_select :tag_ids, question.tags, :id, :title, {}, 
+    <%= f.collection_select :tag_ids, f.object.tags, :id, :title, {}, 
                                       multiple: true,
                                       class: 'js-multiple-select', 
                                       data: {'ajax-url': '/api/tags'} %>
