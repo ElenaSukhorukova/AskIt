@@ -30,6 +30,7 @@ en:
       user:
         username: Name of a user
         email: Email
+        role: Role
         old_password: Old password
         password: Password
         password_confirmation: Password confirmation
@@ -38,6 +39,8 @@ en:
         updated_at: Updated at
       comment:
         body: Body
+      tag:
+        title: Tag
   site_name: AskIt
   pages:
     index:
@@ -61,6 +64,8 @@ en:
       index:
         title: Admin Users
         upload: Upload users from XLSX
+      edit:
+        title: Edit user
   sessions:
     new:
       title: Log in
@@ -102,7 +107,14 @@ en:
   link:
     new: "Add a new %{model}"
     edit: Edit
+    delete: Delete
     show: Show
     zip: Download zipped XLSX
   dialogue:
     you_sure: Are you sure?
+  global:
+    user:
+      roles:
+        basic: Basic
+        moderator: Moderator
+        admin: Admin

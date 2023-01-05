@@ -38,6 +38,7 @@ ru:
       user:
         username: Имя пользователя
         email: Электронная почта
+        role: Роль
         old_password: Старый пароль
         password: Пароль
         password_confirmation: Подтверждение пароля
@@ -45,7 +46,9 @@ ru:
         created_at: Создан
         updated_at: Обновлен
       comment:
-        body: Текст       
+        body: Текст
+      tag:
+        title: Тег   
   site_name: AskIt
   pages:
     index:
@@ -69,6 +72,8 @@ ru:
       index:
         title: Администратор пользователей
         upload: Загрузить пользователей из XLSX
+      edit:
+        title: Редактировать пользователя
   sessions:
     new:
       title: Вход
@@ -110,7 +115,14 @@ ru:
   link:
     new: "Добавить новый %{model}"
     edit: Редактировать
+    delete: Удалить
     show: Показать
     zip: Скачать заархивированный XLSX
   dialogue:
     you_sure: Вы уверены?
+  global:
+    user:
+      roles:
+        basic: Базовый
+        moderator: Модератор
+        admin: Администратор
