@@ -1,0 +1,6 @@
+<% provide :page_title, t('.title') %>
+<% currently_at %>
+
+<h1 class='md-2'><%= t('.title') %></h1>
+
+<%= render partial: 'form', locals: { user: @user, url: admin_user_path(@user) } %>

@@ -12,6 +12,7 @@ wb.add_worksheet(name: 'User') do |sheet|
   sheet.add_row ['ID', user.id], style: [nil, highlight_cell]
   sheet.add_row ['Name', user.username], style: [nil, right_cell]
   sheet.add_row ['Email', user.email], style: [nil, right_cell]
+  sheet.add_row ['Role', user.role], style: [nil, right_cell]
   sheet.add_row ['Created at', user.created_at], style: [nil, date_cell]
   sheet.add_row ['Updated at', user.updated_at], style: [nil, date_cell]
 end
