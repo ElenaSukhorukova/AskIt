@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   def edit; end
 
   def create
-    render plain: params.to_yaml and return
     @user = User.new user_params
     if @user.save
       sign_in @user
