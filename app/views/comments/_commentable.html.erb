@@ -4,11 +4,13 @@
     class: 'btn btn-primary', data: {'bs-toggle': 'collapse'} %>
 
 <%= tag.div class: "collapse #{'show' if is_current_comment} ", id: html_id do %>
-  <%= simple_form_for [commentable, 
-      (is_current_comment ? comment : commentable.comments.build)] do |f| %>
-    <%= f.input :body, as: :text %>
-    <%= f.button :submit, class: "btn btn-primary mt-2" %> 
+  <% if policy(:comment).create? %>
+    <%= simple_form_for [commentable, 
+        (is_current_comment ? comment : commentable.comments.build)] do |f| %>
+      <%= f.input :body, as: :text, placeholder: attribute_model(f.object, :body) %>
+      <%= f.button :submit, class: "btn btn-primary mt-2" %> 
+    <% end %>
   <% end %>
 
-  <%= render commentable.comments.decorate %>
+  <%= render commentable.comments.includes(:user).decorate %>
 <% end %>

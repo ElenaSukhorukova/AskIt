@@ -13,7 +13,8 @@
             </p>
             <%= button_to t('submit.destroy'), comment_path(comment.object), 
                 method: :delete, class: "btn btn-danger me-2 btn-sm",
-                :onclick => "return confirm('Are you sure?')", :remote => true %>
+                :onclick => "return confirm('Are you sure?')", 
+                :remote => true if policy(comment).destroy? %>
           </div>
         </section>
       </div>

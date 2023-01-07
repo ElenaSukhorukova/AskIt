@@ -18,27 +18,22 @@
     <%= attribute_model(@question, :user) %>
     <strong><%= @question.user.name_or_email %></strong>
   </div>
+  <div class="btn-group" role="group">
+    <%= link_to t('link.edit'), edit_question_path(@question), 
+        class: 'btn btn-secondary me-2' if policy(@question).edit? %>
+    <%= button_to t('submit.destroy'), question_path(@question), 
+        method: :delete, class: "btn btn-danger", 
+        :onclick => "return confirm('Are you sure?')", :remote => true if policy(@question).destroy? %>
+  </div>
 
   <%= render 'comments/commentable', commentable: @question, comment: @comment,
-       html_id: 'questionComments' %>
-
-  <% if user_signed_in? && current_user == @question.user %>
-    <div class='border-top border-bottom py-3'>
-      <div class="btn-group" role="group">
-        <%= link_to t('link.edit'), edit_question_path(@question), 
-            class: 'btn btn-secondary me-2' %>
-        <%= button_to t('submit.destroy'), question_path(@question), 
-            method: :delete, class: "btn btn-danger", 
-            :onclick => "return confirm('Are you sure?')", :remote => true %>
-      </div>
-    </div> 
-  <% end %>
-
+      html_id: 'questionComments' %>
 </section>
+
 <hr class='my-3'>
 <section class='col-8'>
   <% if user_signed_in? %>
-    <%= render partial: 'answers/form', locals: { model: [@question, @answer], method: :post } %>
+    <%= render partial: 'answers/form', locals: { model: [@question, @answer], method: :post } if policy(:answer).new? %>
   <% end %>
   
   <% if @answers.try(:any?) %>

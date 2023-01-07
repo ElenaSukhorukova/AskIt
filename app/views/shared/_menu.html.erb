@@ -12,11 +12,11 @@
               <%= nav_tab i18n_model_name(Question.new, 2), 
                 questions_path, class: "nav-link px-4", current_page: current_page %>
             </li>
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= nav_tab t('menu.question'), new_question_path, 
-                  class: "nav-link px-4", current_page: current_page %>
-              </li>
+            <li class="nav-item">
+              <%= nav_tab t('menu.question'), new_question_path, 
+                class: "nav-link px-4", current_page: current_page if policy(:question).new? %>
+            </li>
+            <% if policy([:admin, :user]).index? %>
               <li class="nav-item">
                 <%= nav_tab t('menu.admin_page'), admin_users_path, current_page: current_page, 
                     class: "nav-link px-4" %>

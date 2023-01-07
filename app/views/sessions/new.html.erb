@@ -7,10 +7,10 @@
 
   <%= simple_form_for :session, url: session_path, method: :post do |f| %>
     <%= f.input :email, required: true, value: params[:email],
-        placeholder: attribute_model(f.object, :email), 
+        placeholder: attribute_model(User.new, :email), 
         input_html: { class: 'mb-2' } %>
     <%= f.input :password, required: true, 
-        placeholder: attribute_model(f.object, :password), 
+        placeholder: attribute_model(User.new, :password), 
         input_html: { class: 'mb-2' } %>
     <%= f.input :remember_me, as: :boolean %>
     <%= f.button :submit, t('submit.log_in'), class: "btn btn-primary mt-2" %> 

@@ -18,16 +18,14 @@
             </div>
           </div>
         </section>
-
-        <% if user_signed_in? && current_user == answer.user %>
-          <div class="btn-group" role="group">
-            <%= link_to t('link.edit'), edit_answer_path(answer),
-                class: "btn btn-secondary me-2 btn-sm" %>
-            <%= button_to t('submit.destroy'), answer_path(answer), 
-                method: :delete, class: "btn btn-danger me-2 btn-sm", 
-                :onclick => "return confirm('Are you sure?')", :remote => true %>
-          </div>
-        <% end %>
+        <div class="btn-group" role="group">
+          <%= link_to t('link.edit'), edit_answer_path(answer),
+              class: "btn btn-secondary me-2 btn-sm" if policy(answer).edit? %>
+          <%= button_to t('submit.destroy'), answer_path(answer), 
+              method: :delete, class: "btn btn-danger me-2 btn-sm", 
+              :onclick => "return confirm('Are you sure?')", 
+              :remote => true if policy(answer).destroy? %>
+        </div>
       </div>
     </div>
   </div>

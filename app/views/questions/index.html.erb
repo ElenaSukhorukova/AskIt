@@ -17,7 +17,7 @@
   </section>
 
   <%= link_to t('link.new', model: i18n_model_name(Question.new).downcase), 
-    new_question_path, class: 'btn btn-info me-2' if user_signed_in? %>
+    new_question_path, class: 'btn btn-info me-2'  if policy(:question).new? %>
 
   <div class='my-4'>
     <%== pagination @pagy %>

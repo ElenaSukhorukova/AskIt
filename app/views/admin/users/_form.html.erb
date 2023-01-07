@@ -12,5 +12,5 @@
   <%= f.button :submit, f.object.new_record? ? t('submit.new') : t('submit.edit'), 
               class: "btn btn-primary mt-2" %> 
   <%= render partial: 'shared/cancel_button', 
-      locals: { path: user_path(f.object) } if f.object.persisted? %>	
+      locals: { path: admin_users_path } if f.object.persisted? %>	
 <% end %>
