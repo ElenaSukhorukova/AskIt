@@ -43,3 +43,19 @@ Question.all.each do |question|
     question.tags << tag
   end
 end
+
+Question.all.each do |question|
+  (10 - question.comments.count).times do 
+    Comment.create body:  Faker::Lorem.paragraph(sentence_count: 3, supplemental: true, random_sentences_to_add: 4),
+                   commentable: question,
+                   user: User.find(User.ids.sample)
+  end
+end
+
+Answer.all.each do |answer|
+  (10 - answer.comments.count).times do 
+    Comment.create body:  Faker::Lorem.paragraph(sentence_count: 3, supplemental: true, random_sentences_to_add: 4),
+                   commentable: answer,
+                   user: User.find(User.ids.sample)
+  end
+end
