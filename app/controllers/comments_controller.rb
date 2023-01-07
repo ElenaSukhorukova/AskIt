@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
   before_action :require_authentication
   before_action :set_commentable!, only: :create
   before_action :set_question, only: :create
+  before_action :authorize_comment!
+  after_action :verify_authorized
 
   def create
     @comment = @commentable.comments.build comment_params
@@ -31,10 +33,6 @@ class CommentsController < ApplicationController
 
   private
 
-  def comment_params
-    params.require(:comment).permit(:body).merge(user: current_user)
-  end
-
   def set_commentable!
     klass = [Question, Answer].detect { |c| params["#{c.name.underscore}_id"] }
     raise ActiveRecord::RecordNotFound if klass.blank?
@@ -44,5 +42,13 @@ class CommentsController < ApplicationController
 
   def set_question
     @question = @commentable.is_a?(Question) ? @commentable : @commentable.question
+  end
+
+  def authorize_comment!
+    authorize(@comment || Comment)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:body).merge(user: current_user)
   end
 end

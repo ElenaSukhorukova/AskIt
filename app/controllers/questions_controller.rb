@@ -4,6 +4,8 @@ class QuestionsController < ApplicationController
   include QuestionsAnswers
   before_action :require_authentication, except: %i[index show]
   before_action :define_question!, except: %i[new create index]
+  before_action :authorize_question!
+  after_action :verify_authorized
 
   def index
     @pagy, @questions = pagy Question.all_by_tags(params[:tag_ids]), items: 4
@@ -74,6 +76,10 @@ class QuestionsController < ApplicationController
     session.delete :answer_errors
 
     answer
+  end
+
+  def authorize_question!
+    authorize(@question || Question)
   end
 
   def question_params
