@@ -64,7 +64,6 @@ gem 'simple_form'
 gem 'valid_email2', '~> 4.0.4'
 gem 'blueprinter', '~> 0.25.3'
 gem "pundit", "~> 2.3"
-gem 'lokalise_rails', '~> 5.1.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
