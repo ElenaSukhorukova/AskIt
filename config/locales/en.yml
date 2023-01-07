@@ -27,6 +27,8 @@ en:
       answer:
         body: Answer
         user: Author
+      comment:
+        body: Comment
       user:
         username: Name of a user
         email: Email
@@ -37,8 +39,6 @@ en:
         remember_me: Remember me
         created_at: Created at
         updated_at: Updated at
-      comment:
-        body: Body
       tag:
         title: Tag
   site_name: AskIt
@@ -104,6 +104,7 @@ en:
     already_signed_in: You already signed in
     should_signed_in: You should sign in
     imported: Users were imported
+    not_authorized: User is not authorized
   link:
     new: "Add a new %{model}"
     edit: Edit

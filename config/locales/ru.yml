@@ -30,10 +30,13 @@ ru:
     attributes:
       question:
         title: Заголовок
-        body: Текст
+        body: Вопрос
         user: Автор
       answer:
-        body: Текст
+        body: Ответ
+        user: Автор
+      comment:
+        body: Комментарий
         user: Автор
       user:
         username: Имя пользователя
@@ -45,8 +48,6 @@ ru:
         remember_me: Запомнить меня'
         created_at: Создан
         updated_at: Обновлен
-      comment:
-        body: Текст
       tag:
         title: Тег   
   site_name: AskIt
@@ -112,6 +113,7 @@ ru:
     already_signed_in: Вы уже вошли в ваш профиль
     should_signed_in: Вы должны зайти в ваш профиль
     imported: Пользователи импортированы успешно
+    not_authorized: Пользователь не авторизирован
   link:
     new: "Добавить новый %{model}"
     edit: Редактировать
