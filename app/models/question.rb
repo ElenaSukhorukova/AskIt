@@ -2,6 +2,7 @@
 
 class Question < ApplicationRecord
   include Commentable
+  include Authorship
 
   belongs_to :user
   has_many :answers, dependent: :destroy

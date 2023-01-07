@@ -38,6 +38,14 @@ class User < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
 
+  def author?(obj)
+    obj.user == self
+  end
+
+  def guest?
+    false
+  end
+
   private
 
   def set_gravatar_hash
