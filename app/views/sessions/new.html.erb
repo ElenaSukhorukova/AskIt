@@ -14,5 +14,7 @@
         input_html: { class: 'mb-2' } %>
     <%= f.input :remember_me, as: :boolean %>
     <%= f.button :submit, t('submit.log_in'), class: "btn btn-primary mt-2" %> 
-  <%end %>
+    <%= link_to t('.form.forgot_password'), new_password_reset_path,
+        class: 'btn btn-secondary mt-2' %>
+  <% end %>
 </section>
