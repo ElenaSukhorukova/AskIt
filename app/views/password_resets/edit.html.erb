@@ -1,0 +1,16 @@
+<% provide :page_title, t('.title') %>
+<% currently_at t('menu.log_in') %>
+
+<h1 class='mb-4'><%= t('.title') %></h1>
+
+<%= simple_form_for @user, url: password_reset_path, method: :patch do |f| %>
+  <%= f.input :password_reset_token, as: :hidden, input_html: { value: @user.password_reset_token } %>
+  <%= f.input :email, as: :hidden, input_html: { value: @user.email } %>
+
+  <%= f.input  :password %>
+  <%= f.input  :password_confirmation %>
+
+  <%= f.button :submit, t('submit.edit'), class: "btn btn-primary mt-2" %>
+<% end %>
+
+<%= render partial: 'shared/go_back_button', locals: { path: new_session_path } %>
