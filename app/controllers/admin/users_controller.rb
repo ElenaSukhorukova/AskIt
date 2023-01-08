@@ -62,7 +62,6 @@ module Admin
     def set_user!
       @user = User.find params[:id]
     end
-
     
     def authorize_user!
       authorize(@user || User)
@@ -71,6 +70,6 @@ module Admin
     def user_params
       params.require(:user).permit(
         :username, :email, :password, :password_confirmation, :role
-      ).merge(admin_edit: true)
+      ).merge(skip_all_password: true)
   end
 end
