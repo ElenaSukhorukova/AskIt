@@ -3,7 +3,7 @@
 (5 - User.count).times do |index|
   username = [Faker::Address.full_address, ''].sample
   email = "email#{index + 1}@email.com"
-  password = '123Test123!'
+  password = '123Test123!+'
 
   User.create username: username, email: email, password: password
 end
