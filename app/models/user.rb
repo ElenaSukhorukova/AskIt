@@ -1,39 +1,22 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include Recoverable
+  include Rememberable
+
   enum role: { basic: 0, moderator: 1, admin: 2}, _suffix: :role
-  attr_accessor :old_password, :remember_token, :admin_edit
+  attr_accessor :old_password, :skip_all_password
 
   has_secure_password validations: false
 
   validate :password_presence
   validates :password, confirmation: true, allow_blank: true
   validate :password_complexity
-  validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }
+  validate :correct_old_password, on: :update, if: -> { password.present? && !skip_all_password }
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': { mx: true }
   validates :role, presence: true
   
   before_save :set_gravatar_hash, if: :email_changed?
-
-  def remember_me
-    self.remember_token = SecureRandom.urlsafe_base64
-    # rubocop:disable Rails/SkipsModelValidations
-    update_column :remember_token_digest, digest(remember_token)
-    # rubocop:enable Rails/SkipsModelValidations
-  end
-
-  def forget_me
-    # rubocop:disable Rails/SkipsModelValidations
-    update_column :remember_token_digest, nil
-    # rubocop:enable Rails/SkipsModelValidations
-    self.remember_token = nil
-  end
-
-  def remember_token_authenticated?(remember_token)
-    return false if remember_token_digest.blank?
-
-    BCrypt::Password.new(remember_token_digest).is_password?(remember_token)
-  end
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
