@@ -66,14 +66,30 @@ en:
         upload: Upload users from XLSX
       edit:
         title: Edit user
-  sessions:
-    new:
-      title: Log in
   users:
     new:
       title: Registration of a new user
     edit:
       title: Edition of users' profile
+  sessions:
+    new:
+      title: Log in
+      form:
+        forgot_password: I forgot my password
+  password_resets:
+    fail: Could not reset your password
+    new:
+      title: Reset password
+      form: 
+        email: Email
+    edit:
+      title: Edit password
+    update:
+      updated: Password was updated successfully
+  password_reset_mailer:
+    reset_email:
+      subject: Password reset | AskIt
+      text: Someove has requested password reset of your account.
   menu:
     home: Home
     question: A new question
@@ -93,6 +109,7 @@ en:
     log_in: Log in
     upload: Upload
     search: Search
+    reset: Reset password
   flash:
     new: "The %{model} was saved successfully"
     update: "The %{model} was updated successfully"
@@ -105,12 +122,14 @@ en:
     should_signed_in: You should sign in
     imported: Users were imported
     not_authorized: User is not authorized
+    instructions_were_sent: Instructions were sent your email
   link:
     new: "Add a new %{model}"
     edit: Edit
     delete: Delete
     show: Show
     zip: Download zipped XLSX
+    reset_password: Reset my password
   dialogue:
     you_sure: Are you sure?
   global:

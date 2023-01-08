@@ -49,7 +49,7 @@ ru:
         created_at: Создан
         updated_at: Обновлен
       tag:
-        title: Тег   
+        title: Тег
   site_name: AskIt
   pages:
     index:
@@ -75,14 +75,30 @@ ru:
         upload: Загрузить пользователей из XLSX
       edit:
         title: Редактировать пользователя
-  sessions:
-    new:
-      title: Вход
   users:
     new:
       title: Регистрация нового пользователя
     edit:
       title: Редактирование профиля пользователя
+  sessions:
+    new:
+      title: Вход
+      form:
+        forgot_password: Я забыл свой пароль
+  password_resets:
+    fail: Не удалось сбросить ваш пароль
+    new:
+      title: Сбросить пароль
+      form: 
+        email: Email
+    edit:
+      title: Редактировать пароль
+    update:
+      updated: Пароль успешно обновлен
+  password_reset_mailer:
+    reset_email:
+      subject: Сброс пароля | AskIt
+      text: Кто-то запросил сброс пароля от вашего аккаунта
   menu:
     home: Главная
     question: Новый вопрос
@@ -102,6 +118,7 @@ ru:
     log_in: Войти
     upload: Загрузить
     search: Найти
+    reset: Сбросить пароль
   flash:
     new: "%{model} успешно сохранен"
     update: "%{model} успешно обновлен"
@@ -114,12 +131,14 @@ ru:
     should_signed_in: Вы должны зайти в ваш профиль
     imported: Пользователи импортированы успешно
     not_authorized: Пользователь не авторизирован
+    instructions_were_sent: Инструкции были отправлены на ваш адрес
   link:
     new: "Добавить новый %{model}"
     edit: Редактировать
     delete: Удалить
     show: Показать
     zip: Скачать заархивированный XLSX
+    reset_password: Сбросить мой пароль
   dialogue:
     you_sure: Вы уверены?
   global:
