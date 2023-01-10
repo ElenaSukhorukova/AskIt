@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Tag do
   let(:tag) { create(:tag) }
 
-  it 'returns question\'s body' do
+  it 'returns tag\'s tutle' do
     expect(tag.title).to eq('tag_1')
     expect(tag.title).to be_an_instance_of(String)
   end

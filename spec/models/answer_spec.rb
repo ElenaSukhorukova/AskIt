@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Answer do
   let(:answer) { create(:answer) }
 
-  it 'returns question\'s body' do
+  it 'returns answer\'s body' do
     expect(answer.body).to eq('Answer\'s body')
     expect(answer.body).to be_an_instance_of(String)
   end

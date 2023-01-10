@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Comment do
   let(:comment) { create(:comment) }
 
-  it 'returns question\'s body' do
+  it 'returns comment\'s body' do
     expect(comment.body).to eq('Comment\'s body')
     expect(comment.body).to be_an_instance_of(String)
   end

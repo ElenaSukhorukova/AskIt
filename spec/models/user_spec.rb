@@ -5,8 +5,11 @@ require 'rails_helper'
 RSpec.describe User do
   let(:user) { create(:user) }
 
-  it 'returns question\'s body' do
+  it 'returns user\'s name' do
     expect(user.username).to eq('Walter White')
+  end
+
+  it 'returns user\'s email' do
     expect(user.email).to be_an_instance_of(String)
   end
 
