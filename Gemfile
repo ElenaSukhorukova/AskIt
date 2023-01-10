@@ -64,6 +64,7 @@ gem 'simple_form'
 gem 'valid_email2', '~> 4.0.4'
 gem 'blueprinter', '~> 0.25.3'
 gem "pundit", "~> 2.3"
+gem 'sidekiq', '~> 7.0.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -94,4 +95,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'rspec', '~> 3.5'
+  gem 'shoulda-matchers'
+  gem "factory_bot_rails"
 end
