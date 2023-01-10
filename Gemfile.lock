@@ -273,6 +273,8 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
+    rubocop-rspec (2.16.0)
+      rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     rubyXL (3.4.25)
@@ -379,11 +381,12 @@ DEPENDENCIES
   rubocop (~> 1.40)
   rubocop-performance (~> 1.15)
   rubocop-rails (~> 2.17)
+  rubocop-rspec (~> 2.16.0)
   rubyXL (~> 3.3, >= 3.3.21)
   rubyzip (~> 2.3, >= 2.3.2)
   sassc-rails
   selenium-webdriver
-  shoulda-matchers
+  shoulda-matchers (~> 5.3.0)
   sidekiq (~> 7.0.2)
   simple_form
   sprockets-rails
