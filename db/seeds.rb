@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 (5 - User.count).times do |index|
-  username = [Faker::Address.full_address, ''].sample
+  username = Faker::Name.name
   email = "email#{index + 1}@email.com"
   password = '123Test123!+'
 
