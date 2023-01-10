@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :question do
     user { User.take || create(:user) }
-    title { Faker::Hipster.sentence(word_count: 3) }
-    body { Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 4) }
+    title { "Question's title" }
+    body { "Question's body" }
   end
 end
