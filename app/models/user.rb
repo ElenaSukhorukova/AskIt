@@ -4,7 +4,7 @@ class User < ApplicationRecord
   include Recoverable
   include Rememberable
 
-  enum role: { basic: 0, moderator: 1, admin: 2}, _suffix: :role
+  enum role: { basic: 0, moderator: 1, admin: 2 }, _suffix: :role
   attr_accessor :old_password, :skip_all_password
 
   has_secure_password validations: false
@@ -15,11 +15,12 @@ class User < ApplicationRecord
   validate :correct_old_password, on: :update, if: -> { password.present? && !skip_all_password }
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': { mx: true }
   validates :role, presence: true
-  
+
   before_save :set_gravatar_hash, if: :email_changed?
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def author?(obj)
     obj.user == self

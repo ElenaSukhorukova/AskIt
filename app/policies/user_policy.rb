@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserPolicy < ApplicationPolicy
   def index?
     false
@@ -12,7 +14,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    record == user 
+    record == user
   end
 
   def destroy?

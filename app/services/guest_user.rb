@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GuestUser
   def guest?
     true
@@ -13,7 +15,7 @@ class GuestUser
     super(name, *args, &block)
   end
 
-  def respond_to_missing?(name, include_private)
+  def respond_to_missing?(name, _include_private)
     return true if name.to_s.end_with?('_role?')
 
     super(name, *args, &block)

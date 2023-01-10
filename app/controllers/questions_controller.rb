@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
     @question = @question.decorate
     @pagy, @answers = pagy @question.answers.includes(:user).order(created_at: :desc), items: 3
     @answers = @answers.decorate
-    
+
     @answer = add_answer_errors(@answer)
   end
 
