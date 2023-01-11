@@ -9,6 +9,7 @@ class Question < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :question_tags, dependent: :destroy
   has_many :tags, through: :question_tags
+  has_many_attached :images
 
   validates :title, presence: true, length: { minimum: 2 }
   validates :body, presence: true, length: { minimum: 2 }
