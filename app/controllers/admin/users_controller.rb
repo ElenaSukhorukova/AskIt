@@ -14,14 +14,18 @@ module Admin
           @users = @users.decorate
         end
 
-        format.zip { respond_with_zipped_users }
+        format.zip do 
+          UserBulkExportJob.perform_later current_user
+          redirect_to admin_users_path, success: t('.success')
+        end
       end
     end
 
     def edit; end
 
     def create
-      UserBulkService.call params[:archive][:archive] if params[:archive].present?
+      return unless params[:archive]
+      UserBulkImportJob.perform_later create_blob, current_user
 
       redirect_to admin_users_path, success: t('flash.imported')
     end
@@ -43,33 +47,26 @@ module Admin
 
     private
 
-    def respond_with_zipped_users
-      compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-        User.order(created_at: :desc).each do |user|
-          zos.put_next_entry "user_#{user.id}.xlsx"
-          zos.print render_to_string(
-            layout: false, handlers: [:axlsx], formats: [:xlsx],
-            template: 'admin/users/user',
-            locals: { user: user }
-          )
-        end
-      end
-      compressed_filestream.rewind
-      send_data compressed_filestream.read, filename: 'users.zip'
+    def create_blob
+      file = File.open params[:archive][:archive]
+      result = ActiveStorage::Blob.create_and_upload! io: file,
+                                                      filename: params[:archive][:archive].original_filename
+      file.close
+      result.key 
     end
-  end
 
-  def set_user!
-    @user = User.find params[:id]
-  end
+    def set_user!
+      @user = User.find params[:id]
+    end
 
-  def authorize_user!
-    authorize(@user || User)
-  end
+    def authorize_user!
+      authorize(@user || User)
+    end
 
-  def user_params
-    params.require(:user).permit(
-      :username, :email, :password, :password_confirmation, :role
-    ).merge(skip_all_password: true)
+    def user_params
+      params.require(:user).permit(
+        :username, :email, :password, :password_confirmation, :role
+      ).merge(skip_all_password: true)
+    end
   end
 end
