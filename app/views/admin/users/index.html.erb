@@ -4,7 +4,7 @@
 <h1 class='mb-4'><%= t('.title') %></h1>
 
 <div class='btn-group mb-3'>
-  <%= link_to t('link.zip'), admin_users_path(format: :zip), class: "btn btn-primary mt-2" %>
+  <%= link_to t('link.zip'), admin_users_path(format: :zip), class: "btn btn-primary mt-2", data: {confirm: t('dialogue.you_sure')} %>
 </div>
 
 <table id='customers'>
@@ -27,7 +27,16 @@
 
 <h2 class='my-3'><%= t('.upload') %></h2>
 
-<%= simple_form_for(:archive, url: admin_users_path) do |f| %>
-  <%= f.input :archive, as: :file, required: true, input_html: {class: 'form-control'} %>
-  <%= f.button :submit, t('submit.upload'), class: "btn btn-primary my-4"%>
+<%= form_with url: admin_users_path do |f| %>
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :archive, t('.upload_form.archive') %>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.file_field :archive, class: 'form-control' %>
+    </div>
+  </div>
+
+  <%= f.submit t('submit.upload'), class: 'btn btn-primary' %>
 <% end %>
