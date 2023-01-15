@@ -64,8 +64,16 @@ en:
       index:
         title: Admin Users
         upload: Upload users from XLSX
+        success: Task was sent to perform. When it will be finished you will be recieved to your email
       edit:
         title: Edit user
+    user_mailer:
+      bulk_import_done:
+        subject: User import done | AskIt
+      bulk_import_fail:
+        subject: User import failed | AskIt
+      bulk_export_done:
+        subject: User export done | AskIt 
   users:
     new:
       title: Registration of a new user
