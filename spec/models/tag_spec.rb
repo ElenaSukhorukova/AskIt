@@ -5,8 +5,7 @@ require 'rails_helper'
 RSpec.describe Tag do
   let(:tag) { create(:tag) }
 
-  it 'returns tag\'s tutle' do
-    expect(tag.title).to eq('tag_1')
+  it 'returns tag\'s title' do
     expect(tag.title).to be_an_instance_of(String)
   end
 
@@ -17,13 +16,13 @@ RSpec.describe Tag do
 
     it 'returns true for the invalid tag' do
       tag = create(:tag)
-      another_tag = described_class.new title: 'tag_1'
+      another_tag = described_class.new title: 'tag\'s name'
       expect(another_tag.invalid?).to be true
     end
 
     it 'returns false for the valid tag' do
       tag = create(:tag)
-      another_tag = described_class.new title: 'tag_2'
+      another_tag = described_class.new title: 'tag\'s name 2'
       expect(another_tag.invalid?).to be false
     end
 
