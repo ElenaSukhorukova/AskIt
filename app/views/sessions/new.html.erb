@@ -5,7 +5,7 @@
   <%= render partial: 'shared/go_back_button', locals: { path: root_path } %>
   <h1 class='md-4'><%= t('.title') %></h1>
 
-  <%= simple_form_for :session, url: session_path, method: :post do |f| %>
+  <%= simple_form_for :session, url: session_path, method: :post, id: 'new_session' do |f| %>
     <%= f.input :email, required: true, value: params[:email],
         placeholder: attribute_model(User.new, :email), 
         input_html: { class: 'mb-2' } %>

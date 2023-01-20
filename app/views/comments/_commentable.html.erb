@@ -1,14 +1,17 @@
 <% is_current_comment = comment&.for?(commentable) %>
 
-<%= link_to t('questions.show.comments'), "##{html_id}",
+<%= link_to t('questions.show.comments'), "##{html_id}", 
+    id: "#{commentable.id}_#{html_id}",
     class: 'btn btn-primary', data: {'bs-toggle': 'collapse'} %>
 
-<%= tag.div class: "collapse #{'show' if is_current_comment} ", id: html_id do %>
+<%= tag.div class: "collapse #{'show' if is_current_comment}", id: html_id do %>
   <% if policy(:comment).create? %>
     <%= simple_form_for [commentable, 
         (is_current_comment ? comment : commentable.comments.build)] do |f| %>
-      <%= f.input :body, as: :text, placeholder: attribute_model(f.object, :body) %>
-      <%= f.button :submit, class: "btn btn-primary mt-2" %> 
+      <%= f.input :body, as: :text, placeholder: attribute_model(f.object, :body), 
+          input_html: { id: "new_#{html_id}" } %>
+      <%= f.button :submit, t('comment.new.submit'), 
+          input_html: { id: "new_#{html_id}" }, class: "btn btn-primary mt-2" %> 
     <% end %>
   <% end %>
 

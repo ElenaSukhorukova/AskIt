@@ -19,10 +19,10 @@
           </div>
         </section>
         <div class="btn-group" role="group">
-          <%= link_to t('link.edit'), edit_answer_path(answer),
-              class: "btn btn-secondary me-2 btn-sm" if policy(answer).edit? %>
-          <%= button_to t('submit.destroy'), answer_path(answer), 
-              method: :delete, class: "btn btn-danger me-2 btn-sm", 
+          <%= link_to t('link.edit'), edit_answer_path(answer), class: "btn btn-secondary me-2 btn-sm",
+              id: "edit_#{dom_id(answer)}" if policy(answer).edit? %>
+          <%= button_to t('submit.destroy'), answer_path(answer), method: :delete, 
+              class: "btn btn-danger me-2 btn-sm", id: "destroy_#{dom_id(answer)}",
               :onclick => "return confirm('Are you sure?')", 
               :remote => true if policy(answer).destroy? %>
         </div>

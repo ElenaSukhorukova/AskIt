@@ -22,7 +22,8 @@
       </p>
     </section>
     <div class="btn-group" role="group">
-      <%= link_to t('link.show'), question_path(question), class: 'btn btn-primary me-2' %>
+      <%= link_to t('link.show'), question_path(question), id: dom_id(question),
+          class: 'btn btn-primary me-2' %>
     </div>
   </div>
 </article>

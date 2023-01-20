@@ -19,10 +19,10 @@
     <strong><%= @question.user.name_or_email %></strong>
   </div>
   <div class="btn-group" role="group">
-    <%= link_to t('link.edit'), edit_question_path(@question), 
-        class: 'btn btn-secondary me-2' if policy(@question).edit? %>
-    <%= button_to t('submit.destroy'), question_path(@question), 
-        method: :delete, class: "btn btn-danger", 
+    <%= link_to t('link.edit'), edit_question_path(@question), class: 'btn btn-secondary me-2',
+        id: "edit_#{dom_id(@question)}" if policy(@question).edit? %>
+    <%= button_to t('submit.destroy'), question_path(@question), method: :delete, 
+        id: "destroy_#{dom_id(@question)}", class: "btn btn-danger", 
         :onclick => "return confirm('Are you sure?')", :remote => true if policy(@question).destroy? %>
   </div>
 
