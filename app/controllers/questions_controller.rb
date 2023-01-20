@@ -33,22 +33,20 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.build question_params
 
     if @question.save
-      redirect_to question_path(@question),
-                  success: I18n.t('flash.new', model: flash_for_locates(@question))
-    else
-      render :new, status: :unprocessable_entity
+      return redirect_to question_path(@question),
+              success: t('flash.new', model: flash_for_locates(@question))
     end
+    render :new, status: :unprocessable_entity
   end
 
   def update
     return unless @question.user == current_user
 
     if @question.update question_params
-      redirect_to questions_path,
-                  success: I18n.t('flash.update', model: flash_for_locates(@question))
-    else
-      render :edit, status: :unprocessable_entity
+      return redirect_to question_path(@question),
+              success: t('flash.update', model: flash_for_locates(@question))
     end
+    render :edit, status: :unprocessable_entity
   end
 
   def destroy
@@ -56,7 +54,7 @@ class QuestionsController < ApplicationController
     return unless @question.destroy
 
     redirect_to questions_path,
-                success: I18n.t('flash.destroy', model: flash_for_locates(@question))
+                success: t('flash.destroy', model: flash_for_locates(@question))
   end
 
   private
