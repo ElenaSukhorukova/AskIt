@@ -68,6 +68,11 @@ ru:
       title: Новый ответ
     edit:
       title: Редактирование ответа
+  comment:
+    new:
+      submit: Создать новый комментарий
+    delete:
+      submit: Удалить комментарий
   admin:
     users:
       index:

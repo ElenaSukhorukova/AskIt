@@ -17,8 +17,8 @@ en:
         one: User
         other: Users
       comment:
-        one: Комментарий
-        other: Комментарии   
+        one: Comment
+        other: Comments
     attributes:
       question:
         title: Title
@@ -59,6 +59,11 @@ en:
       title: A new answer
     edit:
       title: Edit the answer
+  comment:
+    new:
+      submit: Create a new comment
+    delete:
+      submit: Delete the comment
   admin:
     users:
       index:
