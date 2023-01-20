@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :tag do
-    title { 'tag_1' }
+    title { "tag's name #{Faker::Alphanumeric.alpha(number: 1)}" }
   end
 end
