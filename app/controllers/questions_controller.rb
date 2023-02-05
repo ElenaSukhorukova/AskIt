@@ -15,12 +15,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = @question.answers.build
-    @question = @question.decorate
-    @pagy, @answers = pagy @question.answers.includes(:user).order(created_at: :desc), items: 3
-    @answers = @answers.decorate
-
-    @answer = add_answer_errors(@answer)
+    load_question_answers
   end
 
   def new
@@ -33,20 +28,38 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.build question_params
 
     if @question.save
-      return redirect_to question_path(@question),
-              success: t('flash.new', model: flash_for_locates(@question))
+      respond_to do |format|
+        format.html do
+          redirect_to question_path(@question),
+                      success: t('flash.new', model: flash_for_locates(@question))
+        end
+        format.turbo_stream do
+          @question = @question.decorate
+          flash.now[:success] = t('flash.new', model: flash_for_locates(@question))
+        end
+      end
+    else
+      render :new, status: :unprocessable_entity
     end
-    render :new, status: :unprocessable_entity
   end
 
   def update
     return unless @question.user == current_user
-
+    
     if @question.update question_params
-      return redirect_to question_path(@question),
-              success: t('flash.update', model: flash_for_locates(@question))
+      respond_to do |format|
+        format.html do
+          redirect_to question_path(@question),
+          success: t('flash.update', model: flash_for_locates(@question))
+        end
+        format.turbo_stream do
+          @question = @question.decorate
+          flash.now[:success] = t('flash.update', model: flash_for_locates(@question))
+        end
+      end
+    else
+      render :edit, status: :unprocessable_entity
     end
-    render :edit, status: :unprocessable_entity
   end
 
   def destroy
@@ -54,26 +67,14 @@ class QuestionsController < ApplicationController
     return unless @question.destroy
 
     redirect_to questions_path,
-                success: t('flash.destroy', model: flash_for_locates(@question))
+                success: t('flash.destroy', model: flash_for_locates(@question)),
+                status: :see_other
   end
 
   private
 
   def define_question!
-    @question = Question.find params[:id]
-  end
-
-  def add_answer_errors(answer)
-    return answer unless session[:answer_errors]
-
-    session[:answer_errors].each do |error, error_message|
-      error_message.each do |msg|
-        answer.errors.add error, msg
-      end
-    end
-    session.delete :answer_errors
-
-    answer
+    @question = Question.find(params[:id]).decorate
   end
 
   def authorize_question!

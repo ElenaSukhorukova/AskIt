@@ -4,36 +4,18 @@
   
   <%= render partial: 'shared/go_back_button', locals: { path: questions_path } %>
 
-  <h1 class='mb-4'><%= @question.title %></h1>
-  <p>
-    <time datetime="<%= @question.formatted_created_at %>">
-      <%= @question.formatted_created_at %>
-    </time>
-  </p>
-  <div class='lead my-3'>
-    <%= sanitize @question.body %>
-  </div>
-  <div class='mb-3'>
-    <%= @question.user.gravatar %>
-    <%= attribute_model(@question, :user) %>
-    <strong><%= @question.user.name_or_email %></strong>
-  </div>
-  <div class="btn-group" role="group">
-    <%= link_to t('link.edit'), edit_question_path(@question), class: 'btn btn-secondary me-2',
-        id: "edit_#{dom_id(@question)}" if policy(@question).edit? %>
-    <%= button_to t('submit.destroy'), question_path(@question), method: :delete, 
-        id: "destroy_#{dom_id(@question)}", class: "btn btn-danger", 
-        :onclick => "return confirm('Are you sure?')", :remote => true if policy(@question).destroy? %>
-  </div>
+  <article class="mb-3">
+    <%= render @question %>
+  </article>
 
-  <%= render 'comments/commentable', commentable: @question, comment: @comment,
-      html_id: 'questionComments' %>
+  <%= render 'comments/commentable', commentable: @question, comment: @comment %>
 </section>
 
 <hr class='my-3'>
-<section class='col-8'>
-  <% if user_signed_in? %>
-    <%= render partial: 'answers/form', locals: { model: [@question, @answer], method: :post } if policy(:answer).new? %>
+<section>
+  <% if policy(@answer).new? %>
+    <%= render partial: 'answers/form', 
+        locals: { model: [@question, Answer.new], method: :post } %>
   <% end %>
   
   <% if @answers.try(:any?) %>
@@ -43,8 +25,10 @@
     </div>
 
     <h2 class='mt-4'><%= i18n_model_name(@answer, 2) %></h2>
-    <%= render @answers %>
-  
+    <%= turbo_frame_tag 'answers' do %>
+      <%= render @answers %>
+    <% end %>
+
     <div class='my-4'>
       <%== pagination @pagy %>
     </div>

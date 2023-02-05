@@ -32,10 +32,11 @@ class UserBulkImportService < ApplicationService
 
       breake unless entry || iteration == 50
       next unless entry.name.end_with? '.xlsx'
+
       yield entry
     end
-  ensure 
-    stream.close     
+  ensure
+    stream.close
   end
 
   def zip_stream

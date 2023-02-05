@@ -11,8 +11,8 @@ module Authorization
     private
 
     def user_not_authorized
-      redirect_to request.referer || root_path,
-                  danger: t('flash.not_authorized')
+      flash[:danger] = t('flash.not_authorized')
+      redirect_to request.referer || root_path
     end
   end
 end

@@ -10,16 +10,21 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.build comment_params
-
-    if @comment.save
-      return redirect_to question_path(@question),
-                         success: I18n.t('flash.new', model: flash_for_locates(@comment))
-    end
-
-    session[:comment_errors] = @comment.errors if @comment.errors.any?
     @comment = @comment.decorate
 
-    load_question_answers do_render: true
+    if @comment.save
+      respond_to do |format|
+        format.html do
+          redirect_to question_path(@question),
+                      success: I18n.t('flash.new', model: flash_for_locates(@comment))
+        end
+        format.turbo_stream do
+          flash.now[:success] = t('flash.new', model: flash_for_locates(@comment))
+        end
+      end
+    else
+      load_question_answers do_render: true
+    end
   end
 
   def destroy
@@ -27,8 +32,15 @@ class CommentsController < ApplicationController
     @question = @comment.commentable.is_a?(Question) ? @comment.commentable : @comment.commentable.question
 
     @comment.destroy
-    redirect_to question_path(@question),
-                success: I18n.t('flash.destroy', model: flash_for_locates(@comment))
+    respond_to do |format|
+      format.html do
+        redirect_to question_path(@question),
+                    success: t('flash.destroy', model: flash_for_locates(@comment)),
+                    status: :see_other
+      end
+
+      format.turbo_stream { flash.now[:success] = t('flash.destroy', model: flash_for_locates(@comment)) }
+    end
   end
 
   private

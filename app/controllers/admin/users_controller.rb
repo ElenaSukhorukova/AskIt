@@ -14,7 +14,7 @@ module Admin
           @users = @users.decorate
         end
 
-        format.zip do 
+        format.zip do
           UserBulkExportJob.perform_later current_user
           redirect_to admin_users_path, success: t('.success')
         end
@@ -25,6 +25,7 @@ module Admin
 
     def create
       return unless params[:archive]
+
       UserBulkImportJob.perform_later create_blob, current_user
 
       redirect_to admin_users_path, success: t('flash.imported')
@@ -52,7 +53,7 @@ module Admin
       result = ActiveStorage::Blob.create_and_upload! io: file,
                                                       filename: params[:archive][:archive].original_filename
       file.close
-      result.key 
+      result.key
     end
 
     def set_user!

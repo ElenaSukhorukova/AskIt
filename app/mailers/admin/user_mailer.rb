@@ -2,7 +2,6 @@
 
 module Admin
   class UserMailer < ApplicationMailer
-
     def bulk_import_done
       @user = params[:user]
 

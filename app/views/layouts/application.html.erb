@@ -16,20 +16,12 @@
       <%= yield :main_menu %>
 
       <main class='container mt-3 content'>
-        <% flash.each do |type, msg| %>    
-          <!-- Change flash messages of devise to bootstrap format -->
-          <% case type %>
-          <% when 'alert'%>
-            <% type = 'danger' %>
-          <% when 'notice' %>
-            <% type = 'success' %>
-          <% end %>
-
-          <%= tag.div msg, class: "alert alert-#{type} text-center", role: 'alert' %>
-        <% end %>
-          <%= yield %>
+        <div id='flash'>
+          <%= render 'shared/flash' %>
+        </div>
+        <%= yield %>
       </main>
-      <%= render 'layouts/footer' %>
+      <%= render 'shared/footer' %>
     </div>
   </body>
 </html>

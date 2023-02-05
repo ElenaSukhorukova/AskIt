@@ -9,7 +9,7 @@ module QuestionsAnswers
       @answer ||= @question.answers.build
       @pagy, @answers = pagy @question.answers.includes(:user).order(created_at: :desc), items: 3
       @answers = @answers.decorate
-      render('questions/show') if do_render
+      render('questions/show', status: :unprocessable_entity) if do_render
     end
   end
 end

@@ -16,16 +16,25 @@
     <% end %>
   </section>
 
-  <%= link_to t('link.new', model: i18n_model_name(Question.new).downcase), 
-    new_question_path, class: 'btn btn-info me-2'  if policy(:question).new? %>
+  <% if policy(:question).new? %>
+    <%= link_to t('link.new', model: i18n_model_name(Question.new).downcase), 
+      new_question_path, class: 'btn btn-info me-2', 
+      data: { turbo_frame: dom_id(Question.new) } %>
+    <div class='my-3'>
+      <%= turbo_frame_tag Question.new %>
+    </div>
+  <% end %>
 
   <div class='my-4'>
     <%== pagination @pagy %>
   </div>
 
-  <% if @questions.try(:any?) %>
-    <%= render @questions %>
+  <%= turbo_frame_tag 'questions' do %>
+    <% if @questions.try(:any?) %>
+      <%= render @questions %>
+    <% end %>
   <% end %>
+
 </section>
 <div class='my-4'>
   <%== pagination @pagy %>

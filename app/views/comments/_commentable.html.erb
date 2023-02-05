@@ -1,19 +1,23 @@
-<% is_current_comment = comment&.for?(commentable) %>
+<% comment_builder = commentable.comments.build %>
+<% html_id = dom_id commentable, 'comments' %>
 
 <%= link_to t('questions.show.comments'), "##{html_id}", 
     id: "#{commentable.id}_#{html_id}",
     class: 'btn btn-primary', data: {'bs-toggle': 'collapse'} %>
 
-<%= tag.div class: "collapse #{'show' if is_current_comment}", id: html_id do %>
-  <% if policy(:comment).create? %>
-    <%= simple_form_for [commentable, 
-        (is_current_comment ? comment : commentable.comments.build)] do |f| %>
-      <%= f.input :body, as: :text, placeholder: attribute_model(f.object, :body), 
-          input_html: { id: "new_#{html_id}" } %>
-      <%= f.button :submit, t('comment.new.submit'), 
-          input_html: { id: "new_#{html_id}" }, class: "btn btn-primary mt-2" %> 
+<%= tag.div class: 'collapse', id: html_id do %>
+  <%= turbo_frame_tag "#{dom_id(commentable)}_#{dom_id(comment_builder)}" do %>
+    <% if policy(:comment).create? %>
+      <%= simple_form_for [commentable, comment_builder] do |f| %>
+        <%= f.input :body, as: :text, placeholder: attribute_model(f.object, :body), 
+            input_html: { id: "new_#{html_id}" } %>
+        <%= f.button :submit, t('comment.new.submit'), 
+            input_html: { id: "new_#{html_id}" }, class: "btn btn-primary mt-2" %> 
+      <% end %>
+    <% end %>
+
+    <%= turbo_frame_tag dom_id(commentable, 'comments_list') do %>
+      <%= render commentable.comments.includes(:user).decorate %>
     <% end %>
   <% end %>
-
-  <%= render commentable.comments.includes(:user).decorate %>
 <% end %>

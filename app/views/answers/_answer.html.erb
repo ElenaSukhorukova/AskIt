@@ -1,35 +1,36 @@
-<%= tag.article class: 'mb-3 card border-0', id: dom_id(answer) do %>
-  <div class='row g-0'>
-    <div class='col-sm-auto text-sm-center align-self-center'>
-      <%= answer.user.gravatar size: 50, css_class: 'd-block' %>
-      <strong><%= answer.user.name_or_email %></strong>
-    </div>
-    <div class='col-sm'>
-      <div class='card-body'>
-        <section class='card-text mb-3'>
-          <div class='col-sm-9'>
-            <small><time datetime="<%= answer.formatted_created_at %>">
-              <%= answer.formatted_created_at %>
-            </time></small>
-            
-            <div class='mt-2'>
-              <strong><%= attribute_model(answer, :body) %></strong>
-              <%= sanitize answer.body %>
+<%= turbo_frame_tag answer do %>
+  <%= tag.article class: 'mb-3 card border-0', id: dom_id(answer) do %>
+    <div class='row g-0'>
+      <div class='col-sm-auto text-sm-center align-self-center'>
+        <%= answer.user.gravatar size: 50, css_class: 'd-block' %>
+        <strong><%= answer.user.name_or_email %></strong>
+      </div>
+      <div class='col-sm'>
+        <div class='card-body'>
+          <section class='card-text mb-3'>
+            <div class='col-sm-9'>
+              <small><time datetime="<%= answer.formatted_created_at %>">
+                <%= answer.decorate.formatted_created_at %>
+              </time></small>
+              
+              <div class='mt-2'>
+                <strong><%= attribute_model(answer, :body) %></strong>
+                <%= sanitize answer.body %>
+              </div>
             </div>
+          </section>
+          <div class="btn-group" role="group">
+            <%= link_to t('link.edit'), edit_answer_path(answer), class: "btn btn-secondary me-2 btn-sm",
+                id: "edit_#{dom_id(answer)}" if policy(answer).edit? %>
+            <%= button_to t('submit.destroy'), answer_path(answer), method: :delete, 
+                class: "btn btn-danger me-2 btn-sm", id: "destroy_#{dom_id(answer)}",
+                :onclick => "return confirm('Are you sure?')", 
+                :remote => true if policy(answer).destroy? %>
           </div>
-        </section>
-        <div class="btn-group" role="group">
-          <%= link_to t('link.edit'), edit_answer_path(answer), class: "btn btn-secondary me-2 btn-sm",
-              id: "edit_#{dom_id(answer)}" if policy(answer).edit? %>
-          <%= button_to t('submit.destroy'), answer_path(answer), method: :delete, 
-              class: "btn btn-danger me-2 btn-sm", id: "destroy_#{dom_id(answer)}",
-              :onclick => "return confirm('Are you sure?')", 
-              :remote => true if policy(answer).destroy? %>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 
-<%= render 'comments/commentable', commentable: answer, comment: @comment,
-  html_id: dom_id(answer, 'comment_form') %>
+  <%= render 'comments/commentable', commentable: answer, comment: @comment %>
+<% end %>

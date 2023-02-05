@@ -7,8 +7,9 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    user = User.find_by email: params[:session][:email]
-    if user&.authenticate(params[:session][:password])
+    debugger
+    user = User.find_by email: params[:email]
+    if user&.authenticate(params[:password])
       do_sign_in user
     else
       render :new, status: :unprocessable_entity

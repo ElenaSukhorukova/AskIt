@@ -1,7 +1,10 @@
 <section>
   <% provide :page_title, t('menu.home') %>
   <% currently_at t('menu.home') %>
-  <h1 class='md-2'><%= t('.title') %></h1>
+  <h1 class='md-2'></h1>
 
-    &copy: @elenasu <%= Time.now.year %>
+  <div class="center jumbotron">
+    <h1><%= t('.title') %></h1>
+    <%= link_to "Sign up now", '#', class: "btn btn-danger btn-lg btn-xlarge" %>
+  </div>
 </section>

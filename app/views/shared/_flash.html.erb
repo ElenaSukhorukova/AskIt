@@ -1,0 +1,11 @@
+<% flash.each do |type, msg| %>    
+  <!-- Change flash messages of devise to bootstrap format -->
+  <% case type %>
+  <% when 'alert'%>
+    <% type = 'danger' %>
+  <% when 'notice' %>
+    <% type = 'success' %>
+  <% end %>
+
+  <%= tag.div msg, class: "alert alert-#{type} text-center", role: 'alert' %>
+<% end %>
