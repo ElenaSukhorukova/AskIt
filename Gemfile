@@ -57,7 +57,7 @@ gem 'pundit', '~> 2.3'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'rubyXL', '~> 3.3', '>= 3.3.21'
 gem 'rubyzip', '~> 2.3', '>= 2.3.2', require: 'zip'
-gem 'sidekiq', '~> 7.0.2'
+gem 'sidekiq', '~> 7.0.8'
 gem 'simple_form'
 gem 'valid_email2', '~> 4.0.4'
 
